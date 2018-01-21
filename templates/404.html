@@ -1,0 +1,9 @@
+{% extends base.html %}
+{% load staticfiles %}
+
+{% block titleblock %}404{% endblock %}
+
+{% block content %}
+<h1><b>Whoops. The fountain you seek does not exist. Try again.</b></h1>
+<img src = "{% static 'img/waterfountain.jpg' %}" alt ="Image of an ornate outdoor water fountain"/>
+{% endblock %}
