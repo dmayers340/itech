@@ -14,3 +14,11 @@ def findafountain(request):
 def page_not_found(request):
 	return render(request, '404.html')
 
+def contact(request):
+	return render(request, 'contact.html')
+
+
+def search(request):
+	return render(request, 'search.html')
+
+
