@@ -6,7 +6,7 @@ def index(request):
 	return render(request, 'findafountain/index.html')
 
 def about(request):
-	return HttpResponse("findafountain/about.html")
+	return render(request, 'findafountain/about.html')
 
 def map(request):
 	return render(request, 'findafountain/map.html')

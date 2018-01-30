@@ -9,5 +9,4 @@ urlpatterns = [
 	url(r'^map/$', views.map, name='map'),
 	url(r'^search/$', views.search, name='search'),
 	url(r'^contact/$', views.contact, name='contact'),
-
 	]
