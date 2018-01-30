@@ -1,8 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'findafountain/base.html' %}
 {% load staticfiles %}
 
 {% block titleblock %}Home{% endblock %}
-
 {% block content %}
 <div class="body">
 	<h3><b>Basic HTML Stuff To put into Find a FOUNTAIN app.
@@ -10,6 +9,11 @@
 	Rubber baby buggy bumper.
 	Peter Piper picked a peck of pickled peppers. 
 	Red leather, yellow leather</b></h3>
+</div>
+<div class=map>
+<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCwXQZJtmDAIpF_ivyBSlfHcgijV5DwfYY
+&q=University+of+Glasgow" allowfullscreen>
+</iframe>
 </div>
 	<img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/>
 

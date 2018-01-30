@@ -3,22 +3,22 @@ from django.http import HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
 
 def index(request):
-	return render(request, 'index.html')
+	return render(request, 'findafountain/index.html')
 
 def about(request):
-	return HttpResponse("About Page")
+	return HttpResponse("findafountain/about.html")
 
-def findafountain(request):
-	return HttpResponse("Find a Fountain")
+def map(request):
+	return render(request, 'findafountain/map.html')
 
 def page_not_found(request):
-	return render(request, '404.html')
+	return render(request, HttpResponseNotFound, 'findafountain/404.html')
 
 def contact(request):
-	return render(request, 'contact.html')
+	return render(request, 'findafountain/contact.html')
 
 
 def search(request):
-	return render(request, 'search.html')
+	return render(request, 'findafountain/search.html')
 
 
