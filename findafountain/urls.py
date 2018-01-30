@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from waterfountain import views
+from findafountain import views
 
 handler404 = 'views.page_not_found'
 

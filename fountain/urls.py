@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from waterfountain import views
+from findafountain import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
-	url(r'^waterfountain/', include('waterfountain.urls')),
+	url(r'^findafountain/', include('findafountain.urls')),
     url(r'^admin/', admin.site.urls),
 ] 

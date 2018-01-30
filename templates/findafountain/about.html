@@ -2,15 +2,31 @@
 {% load staticfiles %}
 
 {% block titleblock %}About{% endblock %}
-<div class="body">
-
 {% block content %}
-	<h3><b>Basic HTML Stuff To put into Find a FOUNTAIN app.
-	I'm just writing things into this block to make it stretch out.
-	Rubber baby buggy bumper.
-	Peter Piper picked a peck of pickled peppers. 
-	Red leather, yellow leather</b></h3>
-	<img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/>
 
-{% endblock %}
+<div class="body">
+		<b>Find a Fountain is a group project by the Thirsty Pythons for the Internet
+		Technology course at the University of Glasgow</b>
+
+		<div class = "lefttop">
+			<b>Lauren</b>
+			<p><img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/></p>
+		</div>
+
+		<div class = "leftbottom">
+			<b>Jemma</b>
+			<p><img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/></p>
+		</div>
+
+		<div class = "righttop">
+			<b>Giedre</b>
+			<p><img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/></p>
+		</div>
+
+		<div class = "rightbottom">
+			<b>Deb</b>
+			<p><img src= "{% static 'img/waterfountain.jpg' %}" alt="Image of a water fountain"/></p>
+			<p>Interests in VR and AR. Developing a multisensory experience in VR.</p>
+		</div>	
 </div>
+{% endblock %}
