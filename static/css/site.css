@@ -1,0 +1,75 @@
+head {
+  position: relative;
+  padding-top: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+body, html {
+  padding: 0px;
+  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.navbar {
+  padding:0px;
+  margin:0px;
+}
+
+
+.content{
+  height: 100%;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.lefttop{
+  margin-top:50px;
+  float:left;
+}
+
+.leftbottom{
+  float:left;
+  margin-top:500px;
+
+}
+
+.righttop{
+  margin-top:50px;
+  float:right;
+}
+
+.rightbottom{
+  float:right;
+  margin-top:500px;
+}
+
+.twitter{
+  float:right;
+}
+
+.map{
+  float: center;
+}
+
+.background { 
+  margin-top:38px;
+    /* The image used */
+    background-image: url("https://i.ytimg.com/vi/vMfbRAWxKig/hqdefault.jpg");
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .footer{
+    bottom:0;
+    position:absolute;
+  }
