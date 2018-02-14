@@ -14,9 +14,31 @@ body, html {
   margin-left: 0px;
 }
 
+.grid{
+  display: grid;
+  grid-gap: 50px 100px;
+  grid-template-columns: auto auto auto;
+  padding:10px;
+  margin-top:50px;
+  text-align: center;
+}
+
+.gridtwo{
+  display: grid;
+  grid-gap: 50px 100px;
+  grid-template-columns: auto auto auto;
+  padding:10px;
+  margin-top:50px;
+  text-align: center;
+}
+
 .navbar {
   padding:0px;
   margin:0px;
+}
+
+.navbar-default{
+  color:#000;
 }
 
 
@@ -45,6 +67,13 @@ body, html {
   float:right;
 }
 
+.contact{
+  float:center;
+  text-align:center;
+  right:50%;
+  left:50%;
+}
+
 .rightbottom{
   float:right;
   margin-top:500px;
@@ -52,10 +81,25 @@ body, html {
 
 .twitter{
   float:right;
+  padding:0px;
+  margin:0px;
+  border: #ddd  1px solid;
+  border-color:#000;
+  height:100%;
+  background-color:gray;
+}
+
+.left{
+  float:left;
+}
+
+.center{
+  float: center;
 }
 
 .map{
   float: center;
+  text-align:center;
 }
 
 .background { 

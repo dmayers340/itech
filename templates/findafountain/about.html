@@ -5,29 +5,39 @@
 {% block content %}
 
 <div class="body">
-		<b>Find a Fountain is a group project by the Thirsty Pythons for the Internet
-		Technology course at the University of Glasgow</b>
+	<center><b>Find a Fountain is a group project by the Thirsty Pythons for the Internet
+		Technology course at the University of Glasgow</b></center>
 
-		<div class = "lefttop">
+	<center><p><h4><b>Thirsty Python Members</b></h4></p></center>
+	<div class = "grid">
+		<div class = "grid-item">
 			<b>Lauren</b>
 			<p><img src= "{% static 'img/fountain4.jpg' %}" alt="Image of a water fountain" height="350" width="500"/></p>
 		</div>
 
-		<div class = "leftbottom">
+		<div class = "grid-item">
+			<p><img src= "{% static 'img/fountain4.jpg' %}" alt="Image of a water fountain" height="250" width="300"/></p>
+		</div>
+
+		<div class = "grid-item">
 			<b>Jemma</b>
 			<p><img src= "{% static 'img/fountain7.jpg' %}" alt="Image of a water fountain" height="300" width="500"/></p>
 		</div>
+	
 
-		<div class = "righttop">
+		<div class = "grid-item">
 			<b>Giedre</b>
 			<p><img src= "{% static 'img/fountain12.jpg' %}" alt="Image of a water fountain" height="300" width="500"/></p>
 		</div>
-
-		<div class = "rightbottom">
+			<div class = "grid-item">
+			<p><img src= "{% static 'img/fountain4.jpg' %}" alt="Image of a water fountain" height="250" width="300"/></p>
+		</div>
+		<div class = "grid-item">
 			<b>Deb</b>
 			<p><img src= "{% static 'img/housesteads.png' %}" alt="Image of a water fountain" height="300" width="500"/></p>
 			<p>Interests in Roman Britain, Archaeology, Classics, UX/UI, </p>
 			<p>Cognitive Science, VR, and AR. Currently developing a multisensory experience in VR.</p>
-		</div>	
+		</div>
+	</div>
 </div>
 {% endblock %}

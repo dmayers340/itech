@@ -4,26 +4,27 @@
 {% block titleblock %}Home{% endblock %}
 
 {% block content %}
-	<h3><b>Basic HTML Stuff To put into Find a FOUNTAIN app.
-	I'm just writing things into this block to make it stretch out.
-	Rubber baby buggy bumper.
-	Peter Piper picked a peck of pickled peppers. 
-	Red leather, yellow leather</b></h3>
 
+<div class = "gridtwo">	
+	<div class = "left">
+		<h4><b>Found a Fountain?</b></h4>
+		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b>
 
-	<img src= "{% static 'img/fountain4.jpg' %}" alt="Image of a water fountain" height="350" width="500"/>
-	<img src= "{% static 'img/fountain7.jpg' %}" alt="Image of a water fountain" height="350" width="500"/>
-	<img src= "{% static 'img/fountain8.jpg' %}" alt="Image of a water fountain" height="350" width="300"/>
-	<img src= "{% static 'img/fountain10.jpg' %}" alt="Image of a water fountain" height="350" width="250"/>
-	<img src= "{% static 'img/fountain12.jpg' %}" alt="Image of a water fountain" height="300" width="500"/>
-	<img src= "{% static 'img/fountain13.jpg' %}" alt="Image of a water fountain" height="300" width="500"/>
-	<img src= "{% static 'img/housesteads.png' %}" alt="Image of a water fountain" height="300" width="500"/>
+		<b>Fountain of the Week:</b>
+		Congratulations to the Library 4th floor fountain.
+		Voted: Most clean, Best stocked, and Easiest to Find
+	</div>
+	<div class = "center">
+		<h4><b>The Thirsty Pythons are Proud to Announce:</b></h4>
+		<h2><b>Find a Fountain</b></h2>
+		
+		<img src = "{% static 'img/University-of-Glasgow-Map.jpg' %}" alt = "Map of the University of Glasgow" style ="width:700px;height:500px;">
+	</div>
 
+	<div class="twitter">
+		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
 
-
-
-<div class="twitter">
-	<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
 
 {% endblock %}

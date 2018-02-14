@@ -20,4 +20,7 @@ def contact(request):
 def search(request):
 	return render(request, 'findafountain/search.html')
 
+def submit(request):
+	return render(request, 'findafountain/submit.html')
+
 
