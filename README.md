@@ -1,5 +1,7 @@
 To Start the Project:
 
+IF IN DOUBT: https://tutorial.djangogirls.org/en/
+
 1.) Create a folder on your computer
 2.) Create a virtual environment (python -m venv myvenv) MAKE SURE IT IS PYTHON 3.6
 3.) On Mac ACTIVATE venv (source myvenv/bin/activate) 
@@ -9,7 +11,7 @@ To Start the Project:
 6.) Install Django (pip install django~=1.11.0)
 
 
-Itech:
+Itech Folder Structure:
 	-fountain (PROJECT FOLDER-has settings/urls/wsgi)
 	-findafountain (app--has app shit)
 	-static 
@@ -21,3 +23,12 @@ Itech:
 	-manage.py 
 
 
+GIT:
+ALWAYS RUN git status FIRST
+
+TO Checkout New Branch:
+
+git checkout -b newbranch
+git add --all .
+git commit -m "changes stuff write detailed message"
+git push --set-upstream origin newbranch
