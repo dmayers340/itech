@@ -9,9 +9,6 @@ def index(request):
 def about(request):
 	return render(request, 'findafountain/about.html')
 
-def map(request):
-	return render(request, 'findafountain/map.html')
-
 def page_not_found(request):
 	return render(request, HttpResponseNotFound, 'findafountain/404.html')
 
