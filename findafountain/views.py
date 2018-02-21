@@ -20,6 +20,9 @@ def search(request):
 
 def submit(request):
 	return render(request, 'findafountain/submit.html')
+	
+def login(request):
+	return render(request, 'findafountain/login.html')
 
 def register(request):
 
