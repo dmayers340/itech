@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
 from findafountain.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 def index(request):
 	return render(request, 'findafountain/index.html')
@@ -18,14 +21,29 @@ def contact(request):
 def search(request):
 	return render(request, 'findafountain/search.html')
 
+@login_required
 def submit(request):
 	return render(request, 'findafountain/submit.html')
 	
-def login(request):
-	return render(request, 'findafountain/login.html')
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+			else:
+				return HttpResponse("Your findafountain account is disabled.")
+		else:
+			print("invalid login details")
+			return HttpResponse("Invalid login details supplied.")
+	else:
+		#return render(request, 'findafountain/login.html', {})
+		return render(request, 'findafountain/login.html', {})
 
 def register(request):
-
 	registered=False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
