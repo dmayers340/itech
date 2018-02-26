@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
 from findafountain.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
@@ -21,7 +21,7 @@ def contact(request):
 def search(request):
 	return render(request, 'findafountain/search.html')
 
-@login_required
+
 def submit(request):
 	return render(request, 'findafountain/submit.html')
 	
@@ -37,10 +37,9 @@ def user_login(request):
 			else:
 				return HttpResponse("Your findafountain account is disabled.")
 		else:
-			print("invalid login details")
+			print("Invalid login details")
 			return HttpResponse("Invalid login details supplied.")
 	else:
-		#return render(request, 'findafountain/login.html', {})
 		return render(request, 'findafountain/login.html', {})
 
 def register(request):
@@ -69,3 +68,8 @@ def register(request):
 	return render(request,'findafountain/register.html', {'user_form': user_form,
 'profile_form': profile_form,
 'registered': registered})
+
+@login_required
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('index'))

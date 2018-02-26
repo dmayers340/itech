@@ -1,9 +1,13 @@
 {% extends 'findafountain/base.html' %}
 {% load staticfiles %}
 
-{% block titleblock %}Register{% endblock %}
+{% block titleblock %}
+Register
+
+{% endblock %}
 
 {% block content %}
+
 
 <!-- Facebook setup -->
   <div id="fb-root"></div>
@@ -27,15 +31,18 @@
     }(document, 'script', 'facebook-jssdk'));
   </script>
 
+
 <!-- Text -->
-  <h1>Sign up or Log in</h1>
+  <h1>Sign in</h1>
   {% if registered %}
 	<b>Thank you for registering!</b>
 	<a href = "{% url 'index' %}">Return to home</a><br />
   {% else %}
-	<b>Sign up with:</b>
+	<b>Sign in with:</b>
 
 <!-- Google button -->
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <meta name="google-signin-client_id" content="690557691244-319ek4ghf34n8nnu8uu6pvrd0h4u34v0.apps.googleusercontent.com">
   <div id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
@@ -57,7 +64,7 @@
     }
   </script>
 
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script><br />
+  <br />
 	
 <!-- FaceBook button -->
   <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
@@ -85,14 +92,17 @@
   {% endif %}
   <br />
 
+<!-- And if they're already a member. -->
+
   <div>
     <b>Already a member? Login below</b>
-    <form id="login_form" method="post" action="{% url 'login' %}">
+      <form id="login_form" method="post" action="{% url 'login' %}">
       {% csrf_token %}
       Username: <input type="text" name="username" value="" size="50" /><br />
       Password: <input type="password" name="password" value="" size="50" /><br />
-      <input type="submit" value="submit" />
-    </form>
+        <input type="submit" value="submit" />
+      </form>
   </div>
+
 
  {% endblock %}
