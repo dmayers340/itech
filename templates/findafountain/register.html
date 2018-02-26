@@ -1,15 +1,48 @@
 {% extends 'findafountain/base.html' %}
 {% load staticfiles %}
 
-{% block titleblock %}Register{% endblock %}
+{% block titleblock %}
+Register
+
+{% endblock %}
 
 {% block content %}
-<h1>Registration</h1>
-{% if registered %}
+
+
+<!-- Facebook setup -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '342740659564764',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.12'
+      });  
+      FB.AppEvents.logPageView();       
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+
+<!-- Text -->
+  <h1>Sign in</h1>
+  {% if registered %}
 	<b>Thank you for registering!</b>
 	<a href = "{% url 'index' %}">Return to home</a><br />
-{% else %}
-	<b>Register here</b>
+  {% else %}
+	<b>Sign in with:</b>
+
+<!-- Google button -->
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <meta name="google-signin-client_id" content="690557691244-319ek4ghf34n8nnu8uu6pvrd0h4u34v0.apps.googleusercontent.com">
   <div id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
@@ -21,7 +54,7 @@
     function renderButton() {
       gapi.signin2.render('my-signin2', {
         'scope': 'profile email',
-        'width': 240,
+        'width': 250,
         'height': 50,
         'longtitle': true,
         'theme': 'dark',
@@ -31,22 +64,45 @@
     }
   </script>
 
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <br />
 	
-	
-	OR Use the Form:
+<!-- FaceBook button -->
+  <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
+  </div>
 
+<!-- Form -->
+	<div>
+	   <br />
+     <b>Or use the form below:</b>
+  </div>
+
+  <div>
 	<form id = "user_form" method="post" action="{% url 'register' %}"
 	enctype="multipart/form-data">
-
 	{% csrf_token %}
 
 <!-- Display each form -->
- {{ user_form.as_p }}
- {{ profile_form.as_p }}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
 
- <!-- Provide a button to click to submit the form. -->
- <input type="submit" name="submit" value="Register" />
- </form>
- {% endif %}
+<!-- Provide a button to click to submit the form. -->
+  <input type="submit" name="submit" value="Register" />
+  </form>
+  </div>
+  {% endif %}
+  <br />
+
+<!-- And if they're already a member. -->
+
+  <div>
+    <b>Already a member? Login below</b>
+      <form id="login_form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      Username: <input type="text" name="username" value="" size="50" /><br />
+      Password: <input type="password" name="password" value="" size="50" /><br />
+        <input type="submit" value="submit" />
+      </form>
+  </div>
+
+
  {% endblock %}

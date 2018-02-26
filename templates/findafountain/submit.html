@@ -2,9 +2,29 @@
 {% load staticfiles %}
 
 {% block titleblock %}Submit{% endblock %}
-
 {% block content %}
+
 <div class = "jumbotron">
 	<h1><b>Submit</b></h1>
 </div>
+
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<div>
+	{% if user.is_authenticated %}
+	<b style="font-size:25px">Please go ahead and submit your fountain.</b>
+	{% else %}
+	<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
+	<div>
+	<img src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
+	</div>
+	{% endif %}
+</div>
+
 {% endblock %}

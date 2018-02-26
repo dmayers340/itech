@@ -27,16 +27,9 @@
     <meta name="google-signin-client_id" content="1024738772885-a45ofhusu995gor4fnj1ara3bt1bjuac.apps.googleusercontent.com">
 
   </head>
-  <body>
-    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
+  <body>
+   
   <div class= "background">
     
     <!-- Navigation -->
@@ -72,26 +65,31 @@
            
             <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-              <a class="nav-link" href= "{% url 'register' %}">Sign Up</a>
+              <a class="nav-link" href= "{% url 'register' %}">Sign up</a>
             </li>
           <li class="nav-item">
-              <a class="nav-link" href= "{% url 'login' %}">Login</a></li>
+              <a class="nav-link" href= "{% url 'login' %}">Logout</a></li>
            </ul>
          </div>
         </div>
       </div>
     </nav>
 
+      <!-- Block content -->
       <div class = "content">
+      <div style="margin:10px;"> 
       {% block content %} 
         <h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
       {% endblock %}
     </div>
     </div>
+  </div>
 
+    <!-- Footer -->
     <footer>
-
+     <div style="margin:10px;"> 
+     <hr />
      <div id="google_translate_element"></div><script type="text/javascript">
       function googleTranslateElementInit() 
       {
@@ -101,13 +99,15 @@
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     </div>
+    </div>
   </footer>
+    
     <script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js' %}"><\/script>')</script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'jquery/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-
+    
   </body>
 </html>
