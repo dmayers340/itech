@@ -25,22 +25,6 @@ def search(request):
 def submit(request):
 	return render(request, 'findafountain/submit.html')
 	
-def user_login(request):
-	if request.method == 'POST':
-		username = request.POST.get('username')
-		password = request.POST.get('password')
-		user = authenticate(username=username, password=password)
-		if user:
-			if user.is_active:
-				login(request, user)
-				return HttpResponseRedirect(reverse('index'))
-			else:
-				return HttpResponse("Your findafountain account is disabled.")
-		else:
-			print("Invalid login details")
-			return HttpResponse("Invalid login details supplied.")
-	else:
-		return render(request, 'findafountain/login.html', {})
 
 def register(request):
 	registered=False
@@ -69,7 +53,19 @@ def register(request):
 'profile_form': profile_form,
 'registered': registered})
 
-@login_required
-def user_logout(request):
-	logout(request)
-	return HttpResponseRedirect(reverse('index'))
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+			else:
+				return HttpResponse("Your findafountain account is disabled.")
+		else:
+			print("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse("Invalid login details supplied.") 
+	else:
+		return render(request, 'findafountain/login.html', {})

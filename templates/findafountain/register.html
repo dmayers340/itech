@@ -43,7 +43,7 @@ Register
 <!-- Google button -->
   <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <meta name="google-signin-client_id" content="690557691244-319ek4ghf34n8nnu8uu6pvrd0h4u34v0.apps.googleusercontent.com">
-  <div id="my-signin2"></div>
+  <div style="margin:5px 0 15px 0" id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -63,43 +63,40 @@ Register
       });
     }
   </script>
-
-  <br />
 	
 <!-- FaceBook button -->
   <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
   </div>
 
 <!-- Form -->
-	<div>
-	   <br />
+	<div style="margin:20px 0 0 0">
      <b>Or use the form below:</b>
   </div>
-
-  <div>
+  <div style="margin:5px 0 0 0">
 	<form id = "user_form" method="post" action="{% url 'register' %}"
 	enctype="multipart/form-data">
 	{% csrf_token %}
 
 <!-- Display each form -->
+
   {{ user_form.as_p }}
   {{ profile_form.as_p }}
+  
 
 <!-- Provide a button to click to submit the form. -->
   <input type="submit" name="submit" value="Register" />
   </form>
   </div>
   {% endif %}
-  <br />
-
+ 
 <!-- And if they're already a member. -->
 
-  <div>
+  <div style="margin:20px 0 0 0">
     <b>Already a member? Login below</b>
       <form id="login_form" method="post" action="{% url 'login' %}">
-      {% csrf_token %}
-      Username: <input type="text" name="username" value="" size="50" /><br />
-      Password: <input type="password" name="password" value="" size="50" /><br />
+        {% csrf_token %}
+        <input style="margin:5px 0 15px 0" type="text" name="username" value="" size="40" placeholder="Username"/><br />
+        <input style="margin:0 0 15px 0" type="password" name="password" value="" size="40" placeholder="Password"/><br />
         <input type="submit" value="submit" />
       </form>
   </div>
