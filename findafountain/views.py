@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpRespons
 from django.template import RequestContext
 from findafountain.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
@@ -69,3 +70,8 @@ def user_login(request):
 			return HttpResponse("Invalid login details supplied.") 
 	else:
 		return render(request, 'findafountain/login.html', {})
+
+@login_required
+def user_logout(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('index'))
