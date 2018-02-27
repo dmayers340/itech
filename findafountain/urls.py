@@ -8,8 +8,8 @@ urlpatterns = [
 	url(r'^about/$', views.about, name='about'),
 	url(r'^search/$', views.search, name='search'),
 	url(r'^contact/$', views.contact, name='contact'),
-	url(r'^login/$', views.login, name = 'login'),
-	url(r'^logout/$', views.logout, name = 'logout'),
+	url(r'^login/$', views.user_login, name='login'),
+	url(r'^logout/$', views.user_logout, name='logout'),
 	url(r'^submit/$', views.submit, name='submit'),
 	url(r'^register/$', views.register, name='register'),
 	]

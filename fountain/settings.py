@@ -83,12 +83,12 @@ DATABASES = {
     }
 }
 
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    )
+#PASSWORD_HASHERS = (
+ #   'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+ #  'django.contrib.auth.hashers.BCryptPasswordHasher',
+ # 'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+ #'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+ #)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -122,7 +122,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

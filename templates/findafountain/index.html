@@ -4,24 +4,127 @@
 {% block titleblock %}Home{% endblock %}
 
 {% block content %}
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+
+<style>
+ #map {
+   width: 100%;
+   height: 500px;
+ }
+</style>
+
 <div class = "jumbotron">
 	<h1><b>Home</b></h1>
 </div>
 
 <div class = "gridtwo">	
-	<div class = "left">
+	<div class = "left" style="width:400px">
 		<h4><b>Found a Fountain?</b></h4>
-		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b>
+		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
 		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
 		<b>Fountain of the Week:</b>
 		Congratulations to the Library 4th floor fountain.
 		Voted: Most clean, Best stocked, and Easiest to Find
 	</div>
+
 	<div class = "center2">
+
 		<h4><b>The Thirsty Pythons are Proud to Announce:</b></h4>
-		<h2><b>Find a Fountain</b></h2>
-		
-		<img src = "{% static 'img/University-of-Glasgow-Map.jpg' %}" alt = "Map of the University of Glasgow" style ="width:700px;height:500px;">
+		<h2><b>Find a Fountain</b></h2> <br/>
+
+			<div id="map"></div>
+			  <script type="text/javascript">
+			  	var map, infoWindow, geoLocatorMarker, geoLocatorInfoWindow; 
+
+			    var locations = [
+			      ['Main Building', 55.872084,  -4.288222, 1],
+			      ['Boyd Orr', 55.873504, -4.292795, 2]
+			    ];
+
+			    function initMap() {
+			    	  map = new google.maps.Map(document.getElementById('map'), {
+				      zoom: 16,
+				      center: new google.maps.LatLng(55.872084, -4.288222),
+				      mapTypeId: google.maps.MapTypeId.ROADMAP
+			    	  });
+
+			    	  geoLocatorInfoWindow = new google.maps.InfoWindow;
+
+				    // Try HTML5 geolocation.
+				        if (navigator.geolocation) {
+					          navigator.geolocation.getCurrentPosition(function(position) {
+					            var pos = {
+					              lat: position.coords.latitude,
+					              lng: position.coords.longitude
+					            };
+
+					            geoLocatorMarker = new google.maps.Marker({
+						        position: new google.maps.LatLng(pos),
+						        map: map,
+						      });
+
+					            geoLocatorInfoWindow.setPosition(pos);
+					            geoLocatorInfoWindow.setContent('Location found.');
+					            geoLocatorInfoWindow.open(map);
+					            map.setCenter(pos);
+					        }, function() {
+	           				handleLocationError(true, infoWindow, map.getCenter());
+	          				});
+				       	} else {
+				          // Browser doesn't support Geolocation
+				          handleLocationError(false, infoWindow, map.getCenter());
+				        }
+
+				       
+					    // adds markers to the map 
+					    var marker, i;
+					    var infowindow = new google.maps.InfoWindow;
+					    for (i = 0; i < locations.length; i++) {  
+						      marker = new google.maps.Marker({
+						        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+						        map: map,
+						        icon: markerSymbol('deepskyblue')
+						      });
+
+						      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+						        return function() {
+						          infowindow.setContent(locations[i][0]);
+						          infowindow.open(map, marker);
+
+						        }
+						      })(marker, i));
+						    }
+					} 
+
+			   // if geolocation disabled 
+			  	function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow, pos) {
+	        		geoLocatorInfoWindow.setPosition(pos);
+	        		geoLocatorInfoWindow.setContent(browserHasGeolocation ?
+	                              'Error: The Geolocation service failed.' :
+	                              'Error: Your browser doesn\'t support geolocation.'); 
+	       			geoLocatorInfoWindow.open(map);
+      			}
+
+      			function markerSymbol(color) {
+				    return {
+				        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+				        fillColor: color,
+				        fillOpacity: 1,
+				        strokeColor: '#000',
+				        strokeWeight: 2,
+				        scale: 1
+    						};
+				}
+
+			  </script>
+
+			   <script async defer
+			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+			    </script>
+
 	</div>
 
 	<div class="right">
