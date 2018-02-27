@@ -65,11 +65,11 @@
 						        position: new google.maps.LatLng(pos),
 						        map: map,
 						      });
-
-					            geoLocatorInfoWindow.setPosition(pos);
-					            geoLocatorInfoWindow.setContent('Location found.');
-					            geoLocatorInfoWindow.open(map);
+					            
+					            geoLocatorInfoWindow.setContent('You are here');
+					            geoLocatorInfoWindow.open(map, geoLocatorMarker);
 					            map.setCenter(pos);
+
 					        }, function() {
 	           				handleLocationError(true, infoWindow, map.getCenter());
 	          				});
