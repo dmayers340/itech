@@ -19,10 +19,6 @@ def page_not_found(request):
 def contact(request):
 	return render(request, 'findafountain/contact.html')
 
-def search(request):
-	return render(request, 'findafountain/search.html')
-
-
 def submit(request):
 	return render(request, 'findafountain/submit.html')
 	

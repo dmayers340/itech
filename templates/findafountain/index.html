@@ -3,6 +3,12 @@
 
 {% block titleblock %}Home{% endblock %}
 
+{% block title %}
+	<h1>Find a Fountain</h1>
+    <p class="lead"><b>Created by The Thirsty Pythons</b></p>
+{% endblock %}
+
+
 {% block content %}
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -16,10 +22,6 @@
  }
 </style>
 
-<div class = "jumbotron">
-	<h1><b>Home</b></h1>
-</div>
-
 <div class = "gridtwo">	
 	<div class = "left" style="width:400px">
 		<h4><b>Found a Fountain?</b></h4>
@@ -31,11 +33,7 @@
 	</div>
 
 	<div class = "center2">
-
-		<h4><b>The Thirsty Pythons are Proud to Announce:</b></h4>
-		<h2><b>Find a Fountain</b></h2> <br/>
-
-			<div id="map"></div>
+			<div id="map">
 			  <script type="text/javascript">
 			  	var map, infoWindow, geoLocatorMarker, geoLocatorInfoWindow; 
 
@@ -124,7 +122,7 @@
 			   <script async defer
 			    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
 			    </script>
-
+			</div>
 	</div>
 
 	<div class="right">

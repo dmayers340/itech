@@ -7,17 +7,35 @@ head {
 
 body, html {
   padding: 0px;
-  margin: 0px;
+  margin: 10px;
   margin-top: 0px;
   margin-bottom: 0px;
   margin-right: 0px;
   margin-left: 0px;
-  background-color:#82CFFD;
+  background-color:#fff;
+
 }
 
 footer{
   bottom:0;
 }
+
+header {
+  padding: 50px;
+  margin-top:0px;
+  margin-left:1px;
+  color: #000;
+  background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+  background-size:auto auto;
+  background-position:left;
+  bottom:0;
+  left:0;
+  border: #ddd  1px solid;
+  border-color:#000;  
+  vertical-align: bottom;
+}
+
 .grid{
   display: grid;
   grid-gap: 50px 100px;
@@ -37,7 +55,7 @@ footer{
 }
 
 .navbar {
-  padding:0px;
+  padding:10px;
   margin:0px;
   font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
   font-size: 14px;
@@ -49,7 +67,7 @@ footer{
 
 .navbar-default{
   color:#000;
- font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-variant: normal;
@@ -57,16 +75,22 @@ footer{
   line-height: 20px; 
 }
 
-
+.registration{
+  text-align:center;
+  margin:50px;
+}
 .content{
   height: 100%;
 }
 
 .starter-template {
-  padding: 40px 15px;
   text-align: center;
 }
 
+.form{
+  margin-top:5px;
+  padding-top:5px;
+}
 
 .contact{
   float:center;
@@ -121,6 +145,9 @@ footer{
   float: center;
 }
 
+.googlebutton{
+  float:center;
+}
 .center{
   float: center;
   border: #ddd  1px solid;
@@ -128,8 +155,12 @@ footer{
 }
 
 .map{
+
   float: center;
-  text-align:center;
+  text-align:center;  
+  width:100%;
+  border: #ddd  1px solid;
+  border-color:#000;
 }
 
 .background { 

@@ -43,15 +43,11 @@
           <ul class="nav navbar-nav navbar-left">
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'index' %}">Home
-                <span class="sr-only">(current)</span>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'search' %}">Search</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'contact' %}">Contact</a>
@@ -77,10 +73,18 @@
         </div>
       </div>
     </nav>
+    <!-- Page Content -->
+      <div class="starter-template">{% block one %}{% endblock %}
 
-      <!-- Block content -->
-      <div class = "content">
-      <div style="margin:10px;"> 
+      <header>
+      <div class="container text-center">
+        <div class = "text">
+          {% block title %}
+          {% endblock %}
+        </div>
+      </div>
+    </header>
+
       {% block content %} 
         <h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
