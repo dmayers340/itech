@@ -5,9 +5,12 @@
     Login
 {% endblock %}
 
+{% block title %}
+  <h1>Login to Find a Fountain</h1>
+{% endblock %}
+
 {% block content %}
 
-<h1>Login to Fountain</h1>
 <form id="login_form" method="post" action="{% url 'login' %}">
 	{% csrf_token %}
 	Username: <input type="text" name="username" value="" size="50" /> <br />

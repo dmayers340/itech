@@ -8,4 +8,21 @@ class UserProfile(models.Model):
 	def __str__(self):
 		return self.user.username
 
+class Fountain(models.Model):
+	name = models.CharField(max_length=32, unique=False)
+	lat = models.FloatField()
+	lng = models.FloatField()
+	image = models.ImageField(upload_to='fountain_images', blank=True)
+	description = models.CharField(max_length=250, unique=False)
+	floor = models.IntegerField(default=0)
+	reviews = models.IntegerField(default=0)
+	rating = models.IntegerField(default=0)
+	numberratings = models.IntegerField(default=0)
+	avgrating = models.FloatField(default=0)
+	popularity = models.IntegerField(default=0)
+	broken = models.BooleanField(default='false')
+
+	def __str__(self):
+		return self.name
+
 # Create your models here.

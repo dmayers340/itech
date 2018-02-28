@@ -2,11 +2,12 @@
 {% load staticfiles %}
 
 {% block titleblock %}About{% endblock %}
-{% block content %}
 
-<div class = "jumbotron">
-	<h1><b>About</b></h1>
-</div>
+{% block title %}
+	<h1>About</h1>
+    <p class="lead"><b>Find Out More About The Thirsty Pythons</b></p>
+{% endblock %}
+{% block content %}
 
 <div class="body">
 	<center><b>Find a Fountain is a group project by the Thirsty Pythons for the Internet
@@ -35,6 +36,7 @@
 			<p><img src= "{% static 'img/housesteads.png' %}" alt="Image of a water fountain" height="300" width="500"/></p>
 			<p>Interests in Roman Britain, Archaeology, Classics, UX/UI,
 			Cognitive Science, VR, and AR. Currently developing a multisensory experience in VR.</p>
+			<p>Check out my website <a href= "http://debmayers.com"> Here </a></p>
 		</div>
 		
 	</div>

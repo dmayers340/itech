@@ -2,6 +2,9 @@
 {% load staticfiles %}
 
 {% block titleblock %}Register{% endblock %}
+{% block title %}
+  <h1>Login to Find a Fountain</h1>
+{% endblock %}
 
 {% block content %}
 
@@ -30,7 +33,6 @@
 
 
 <!-- Text -->
-  <h1>Sign in</h1>
   {% if registered %}
 	<b>Thank you for registering!</b>
 	<a href = "{% url 'index' %}">Return to home</a><br />
