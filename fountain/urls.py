@@ -24,3 +24,4 @@ urlpatterns = [
 	url(r'^findafountain/', include('findafountain.urls')),
     url(r'^admin/', admin.site.urls),
 ] 
+

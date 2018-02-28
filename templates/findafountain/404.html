@@ -3,7 +3,11 @@
 
 {% block titleblock %}404{% endblock %}
 
+{% block title %}
+	<h1>404 Error</h1>
+{% endblock %}
+
 {% block content %}
 <h1><b>Whoops. The fountain you seek does not exist. Try again.</b></h1>
-<img src = "{% static 'img/waterfountain.jpg' %}" alt ="Image of an ornate outdoor water fountain"/>
+<img src = "{% static 'img/fountain.jpg' %}"/>
 {% endblock %}

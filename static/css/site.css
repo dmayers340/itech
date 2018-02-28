@@ -13,6 +13,7 @@ body, html {
   margin-right: 0px;
   margin-left: 0px;
   background-color:#fff;
+  width:100%;
 
 }
 
@@ -36,22 +37,8 @@ header {
   vertical-align: bottom;
 }
 
-.grid{
-  display: grid;
-  grid-gap: 50px 100px;
-  grid-template-columns: auto auto auto;
-  padding:10px;
-  margin-top:50px;
-  text-align: center;
-}
-
-.gridtwo{
-  display: grid;
-  grid-gap: 50px 100px;
-  grid-template-columns: auto auto auto;
-  padding:10px;
-  margin-top:50px;
-  text-align: center;
+.container-fluid{
+  width: 100%;
 }
 
 .navbar {
@@ -73,6 +60,7 @@ header {
   font-variant: normal;
   font-weight: 400;
   line-height: 20px; 
+  padding:10px;
 }
 
 .registration{
@@ -85,6 +73,8 @@ header {
 
 .starter-template {
   text-align: center;
+  width:100%;
+  padding:10px;
 }
 
 .form{
@@ -104,21 +94,34 @@ header {
 
 .left{
   float:left;
-  text-align:center;
   border: #ddd  1px solid;
   border-color:#000;
-  background-color:#8292fd;
+  height:100%;
+  width:300px;
 
 }
 
 .right{
   float:right;
-  padding:0px;
-  margin:0px;
   border: #ddd  1px solid;
   border-color:#000;
   height:100%;
-  background-color:#8292fd;
+  width:300px;
+
+}
+
+.col-sm{
+  width: 100%;
+  margin:0;
+  border: #ddd  1px solid;
+  border-color:#000;
+}
+
+.col-6{
+  width: 100%;
+  margin:0;
+  border: #ddd  1px solid;
+  border-color:#000;
 }
 
 .jumbotron{
@@ -154,15 +157,6 @@ header {
   border-color:#000;
 }
 
-.map{
-
-  float: center;
-  text-align:center;  
-  width:100%;
-  border: #ddd  1px solid;
-  border-color:#000;
-}
-
 .background { 
   margin-top:38px;
     /* The image used */
@@ -178,3 +172,15 @@ header {
     bottom:0;
     position:absolute;
   }
+
+
+h1 {
+  font-family: 'Acme', sans-serif;
+  line-height: 55px;
+
+}
+ 
+p {
+  font-family: 'Acme', sans-serif; 
+  line-height: 25px;
+}

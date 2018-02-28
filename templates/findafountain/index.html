@@ -22,8 +22,10 @@
  }
 </style>
 
-<div class = "gridtwo">	
-	<div class = "left" style="width:400px">
+	<div class = "container-fluid">
+		<div class = "row">
+
+		<div class = "col-sm">
 		<h4><b>Found a Fountain?</b></h4>
 		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
 		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
@@ -32,7 +34,7 @@
 		Voted: Most clean, Best stocked, and Easiest to Find
 	</div>
 
-	<div class = "center2">
+    	<div class="col-6">
 			<div id="map">
 			  <script type="text/javascript">
 			  	var map, infoWindow, geoLocatorMarker, geoLocatorInfoWindow; 
@@ -125,7 +127,7 @@
 			</div>
 	</div>
 
-	<div class="right">
+		<div class = "col-sm">
 		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</div>
 

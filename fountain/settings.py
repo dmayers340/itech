@@ -27,7 +27,7 @@ SECRET_KEY = 'dtz)_laki=h-@1i)cwe3%2vf1h-0c7axq8t!uopp(x@0875qz&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['findafountain.pythonanywhere.com', 'localhost', '127.0.0.1',]
 
 
 # Application definition
