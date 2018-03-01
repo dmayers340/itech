@@ -222,7 +222,8 @@
 								map: map,
 								building: locations[i][12],
 								floor: locations[i][5],
-								icon: markerSymbol('dodgerblue'),
+								icon: {url: "{% static 'img/icon.svg' %}",
+								scaledSize: new google.maps.Size(60, 50)},
 								visible: true
 							  });
 
@@ -407,17 +408,6 @@
 					geoLocatorInfoWindow.open(map);
 				}
 
-
-				function markerSymbol(color) {
-					return {
-						path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
-						fillColor: color,
-						fillOpacity: 1,
-						strokeColor: 'white',
-						strokeWeight: 2,
-						scale: 1
-							};
-				}
 
 			  </script>
 
