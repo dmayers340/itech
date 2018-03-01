@@ -14,7 +14,7 @@ body, html {
   margin-left: 0px;
   background-color:#fff;
   width:100%;
-  
+
 }
 
 footer{
@@ -131,6 +131,7 @@ header {
   margin:0;
   border: #ddd  1px solid;
   border-color:#000;
+  overflow:scroll;
 }
 
 .center2{
