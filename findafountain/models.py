@@ -8,6 +8,7 @@ class UserProfile(models.Model):
 	def __str__(self):
 		return self.user.username
 
+
 class Fountain(models.Model):
 	name = models.CharField(max_length=32, unique=False)
 	lat = models.FloatField()

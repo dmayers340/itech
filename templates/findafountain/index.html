@@ -19,42 +19,12 @@
 	   width: 700px;
 	   height: 500px;
 	 }
-
-	 #floating-panel {
-		position: absolute;
-		top: 10px;
-		left: 25%;
-		z-index: 5;
-		background-color: yellow;
-		padding: 5px;
-		border: 1px solid #999;
-		text-align: center;
-		font-family: 'Roboto','sans-serif';
-		line-height: 30px;
-		padding-left: 10px;
-		background: #fff;
-		padding: 5px;
-		font-size: 14px;
-		font-family: Arial;
-		border: 1px solid #ccc;
-		box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
-		display: none;
-	 }
-
-	 #right-panel {
-		font-family: 'Roboto','sans-serif';
-		font-size: 14px;
-		line-height: 30px;
-		background-color: white;
-		width: 200px;
-		height: 500px;
-		float: right;
-		overflow: hidden;
-	 }
 </style>
 
-<div class = "gridtwo">	
-	<div class = "left" style="width:400px">
+<div class = "container-fluid">
+		<div class = "row">
+
+		<div class = "col-sm">
 		<h4><b>Found a Fountain?</b></h4>
 		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
 		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
@@ -63,7 +33,7 @@
 		Voted: Most clean, Best stocked, and Easiest to Find
 	</div>
 
-	<div class = "center2">
+<div class="col-6">
 		<b>Thirsty? You came to the right page! <br/> Click on any of the fountains to get directions or select one of the options below.</b> <br/>
 		<br/>  
 			
@@ -90,14 +60,11 @@
 
 			</button> 
 
-			
-
-			<button type="button" class="btn btn-primary" alt="Find nearest" align="right" onclick="findNearest()">
+      <button type="button" class="btn btn-primary" alt="Find nearest" align="right" onclick="findNearest()">
 				<b>Show nearest<b>  
 			</button> 
 
 			<br/><br/>
-
 			<div id="map">
 			  <script type="text/javascript">
 
@@ -444,9 +411,10 @@
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
 			 </script>
 		</div>
+
 	</div>
 
-	<div class="right">
+		<div class = "col-sm">
 		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 	</div>
 

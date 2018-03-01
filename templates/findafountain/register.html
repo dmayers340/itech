@@ -37,31 +37,9 @@
 	<b>Thank you for registering!</b>
 	<a href = "{% url 'index' %}">Return to home</a><br />
   {% else %}
-	<b>New to Find a Fountain? Sign in with:</b>
+	<h2><b>New to Find a Fountain?</b></h2><br />
+       <h3><b> Sign up here:</b></h3><br />
 
-<!-- Google button -->
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-  <meta name="google-signin-client_id" content="690557691244-319ek4ghf34n8nnu8uu6pvrd0h4u34v0.apps.googleusercontent.com">
-  <div style="margin:5px 0 15px 0" id="my-signin2"></div>
-  <script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 250,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
 	
 <!-- FaceBook button -->
   <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
@@ -90,7 +68,8 @@
 <!-- And if they're already a member. -->
 
   <div style="margin:20px 0 0 0">
-    <b>Already a member? Login below</b>
+    <h2><b>Already a member?</b></h2><br />
+    <h3><b> Login below</b></h3>
       <form id="login_form" method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <input style="margin:5px 0 15px 0" type="text" name="username" value="" size="40" placeholder="Username"/><br />
