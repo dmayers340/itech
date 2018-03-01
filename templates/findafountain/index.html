@@ -17,7 +17,8 @@
 <style>
  #map {
 	   width: 100%;
-	   height: 100%;
+	   height: 50%;
+	   overflow: hidden;
 	 }
 </style>
 
@@ -101,9 +102,6 @@
 				];
 
 				function initMap() {
-
-					  directionsService = new google.maps.DirectionsService();
-					  directionsDisplay = new google.maps.DirectionsRenderer();
 
 					  map = new google.maps.Map(document.getElementById('map'), {
 					  zoom: 16,
@@ -200,7 +198,12 @@
 						]
 					  });
 
+
+					 directionsDisplay = new google.maps.DirectionsRenderer();
+					 directionsService = new google.maps.DirectionsService();
+					
 					 geoLocatorInfoWindow = new google.maps.InfoWindow;
+					 geoLocatorMarker = new google.maps.Marker({map: map});
 
 					 locateUser();
 					 loadAll();			
@@ -208,8 +211,6 @@
 
 				function loadAll()
 				{	
-					directionsDisplay.setMap(null);
-
 					markers = [];
 					var marker, i;
 						var infowindow = new google.maps.InfoWindow({
@@ -250,6 +251,7 @@
 
 							  markers.push(marker);
 							}
+
 					var markerCluster = new MarkerClusterer(map, markers, {imagePath: "{% static 'js/markerclusterer/images/m' %}"});		
 				}
 
@@ -265,6 +267,8 @@
 					for (var i = 0; i < markers.length; i++) {
          			 markers[i].setVisible(true);
        				 }
+
+       				// setBounds(); 
 				}
 
 				function sortMarkers()
@@ -290,8 +294,6 @@
 
 				function findNearest()
 				{	
-					locateUser(); 
-
 					var pi = Math.PI;
 				    var R = 6371; //equatorial radius
 				    var distances = [];
@@ -328,7 +330,7 @@
 				}
    
 				function locateUser() 
-				{
+				{		
 						// Try HTML5 geolocation.
 							if (navigator.geolocation) {
 
@@ -340,15 +342,13 @@
 
 									currentLat = position.coords.latitude;
 									currentLng = position.coords.longitude;
-
-									geoLocatorMarker = new google.maps.Marker({
-									position: new google.maps.LatLng(currentPosition),
-									map: map,
-								  });
+									pos = new google.maps.LatLng(currentPosition);
 									
+									geoLocatorMarker.setPosition(pos);
 									geoLocatorInfoWindow.setContent('Your location');
 									geoLocatorInfoWindow.open(map, geoLocatorMarker);
-									map.setCenter(currentPosition);
+
+									// setBounds();
 
 								}, function() {
 								handleLocationError(true, infoWindow);
@@ -361,7 +361,7 @@
 
 				function calcRoute(directionsService, directionsDisplay, endPoint) {
 					
-					directionsDisplay.setMap(map);	
+					directionsDisplay.setMap(map);
 
 					var lat1 = endPoint[1];
 					var lng1 = endPoint[2];
@@ -380,6 +380,19 @@
 					directionsDisplay.setOptions({ preserveViewport: true });
 					}
 						});
+
+					// setBounds(); 
+
+				}
+
+				function setBounds() {
+					var bounds = new google.maps.LatLngBounds();
+					bounds.extend(geoLocatorMarker.getPosition());
+					for (var i =0; i<markers.length; i++) {
+						bounds.extend(markers[i].getPosition());
+					}
+					map.fitBounds(bounds);
+					map.setCenter(bounds.getCenter());
 				}
 
 				// if geolocation disabled 
