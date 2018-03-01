@@ -14,6 +14,7 @@ body, html {
   margin-left: 0px;
   background-color:#fff;
   width:100%;
+  
 }
 
 footer{
@@ -25,7 +26,7 @@ header {
   margin-top:0px;
   margin-left:1px;
   color: #000;
-  background-image: url(../img/logo.png);
+  background-color:#4885ed;
   background-repeat: no-repeat;
   background-size:auto auto;
   background-position:left;
@@ -52,8 +53,8 @@ header {
 .navbar {
   padding:10px;
   margin:0px;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
+  font-family: 'Acme', sans-serif;
+  font-size: 18px;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
@@ -62,7 +63,7 @@ header {
 
 .navbar-default{
   color:#000;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-family: 'Acme', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-variant: normal;
@@ -130,29 +131,8 @@ header {
   margin:0;
   border: #ddd  1px solid;
   border-color:#000;
-  overflow: scroll;
 }
 
-.jumbotron{
-  top:0;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 20px;  
-  width:100%;
-  margin-top:0px;
-  margin-bottom:0px;
-  margin-left:0px;
-  margin-right:0px;
-  padding-right:0px;
-  padding-left:0px;
-  padding-top:5px;
-  padding-bottom:5px;
-  text-align:center;
-  background-color:#82fdee;
-}
 .center2{
   float: center;
 }
