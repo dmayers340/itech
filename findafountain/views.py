@@ -6,9 +6,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from findafountain.models import Fountain 
 
 def index(request):
-	return render(request, 'findafountain/index.html')
+	fountain_list = Fountain.objects.filter() 
+	context_dict = {'fountains': fountain_list}
+	return render(request, 'findafountain/index.html', context_dict) 
 
 def about(request):
 	return render(request, 'findafountain/about.html')

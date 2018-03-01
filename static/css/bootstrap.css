@@ -18,7 +18,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #007bff;
+  --primary: #0088cc;
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
@@ -2502,9 +2502,13 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #0088cc;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16 px;
 }
 
 .btn-primary:hover {
@@ -3156,19 +3160,20 @@ tbody.collapse.show {
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  display: inline-block;
   float: left;
   min-width: 10rem;
-  padding: 0.5rem 0;
+  padding: 0.375rem 0.75rem;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #212529;
+  color: white;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #0088cc;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+  border-radius: 8px;
+
 }
 
 .dropup .dropdown-menu {
@@ -3274,6 +3279,7 @@ tbody.collapse.show {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
+   
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
