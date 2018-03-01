@@ -12,7 +12,7 @@ class Fountain(models.Model):
 	name = models.CharField(max_length=32, unique=False)
 	lat = models.FloatField()
 	lng = models.FloatField()
-	image = models.ImageField(upload_to='fountain_images', blank=True)
+	image = models.ImageField(upload_to='fountain_images', blank=False, default='fountain_images/default2.jpg')
 	description = models.CharField(max_length=250, unique=False)
 	floor = models.IntegerField(default=0)
 	reviews = models.IntegerField(default=0)
@@ -21,6 +21,7 @@ class Fountain(models.Model):
 	avgrating = models.FloatField(default=0)
 	popularity = models.IntegerField(default=0)
 	broken = models.BooleanField(default='false')
+	building = models.CharField(max_length=32, unique=False)
 
 	def __str__(self):
 		return self.name
