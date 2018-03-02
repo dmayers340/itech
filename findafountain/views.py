@@ -5,13 +5,23 @@ from findafountain.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
-from findafountain.models import Fountain 
+from django.core.urlresolvers import reverse 
+from findafountain.models import Fountain
 
 def index(request):
-	fountain_list = Fountain.objects.filter() 
-	context_dict = {'fountains': fountain_list}
-	return render(request, 'findafountain/index.html', context_dict) 
+	fountain_list = Fountain.objects.order_by('name').distinct()
+	floor_list = Fountain.objects.order_by('floor').distinct()
+	context_dict = {'fountains': fountain_list, 'floors': floor_list}
+	return render(request, 'findafountain/index.html', context_dict)
+
+def fountain(request, fountain_id_slug):
+	context_dict = {}
+	try: 
+		fountain = Fountain.objects.get(id=fountain_id_slug)
+		context_dict['fountain'] = fountain
+	except Fountain.DoesNotExist: 
+		context_dict['fountain'] = None
+	return render(request, 'findafountain/fountain.html', context_dict)
 
 def about(request):
 	return render(request, 'findafountain/about.html')

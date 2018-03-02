@@ -8,7 +8,6 @@
 	<p class="lead"><b>Created by The Thirsty Pythons</b></p>
 {% endblock %}
 
-
 {% block content %}
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -31,7 +30,7 @@
 		<b>Fountain of the Week:</b>
 		Congratulations to the Library 4th floor fountain.
 		Voted: Most clean, Best stocked, and Easiest to Find
-	</div>
+		</div>
 
 <div class="col-6">
 		<b>Thirsty? You came to the right page! <br/> Click on any of the fountains to get directions or select one of the options below.</b> <br/>
@@ -43,21 +42,26 @@
 
 			<button type="button" class="btn btn-primary" alt="Search: " align="center">
 				
-				<b>Show building: </b>
-					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers(), enable()">
-						<option value="all">All</option>{% for fountain in fountains %}
+				<b>Show building: </b> 
+					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers(), enableFloor()">
+						<option value="all">All</option>
+						{% for fountain in fountains %}
+						{% if fountain.building %}
 						<option value="{{fountain.building}}">{{fountain.building}}</option>
+						{% endif %}
 						{% endfor %}
 					</select>
+				 
 
 				<b>Show floor: </b>
 					<select id ="Floor" class ="btn btn-basic" onchange="sortMarkers()">
 						<option value="all">All</option>
-						{% for fountain in fountains %}
-						<option value="{{fountain.floor}}">{{fountain.floor}}</option>
+						{% for floor in floors %}
+						{% if floor.floor %}
+						<option value="{{floor.floor}}">{{floor.floor}}</option>
+						{% endif %}
 						{% endfor %}
 					</select>
-
 			</button> 
 
       <button type="button" class="btn btn-primary" alt="Find nearest" align="right" onclick="findNearest()">
@@ -68,11 +72,11 @@
 			<div id="map">
 			  <script type="text/javascript">
 
-			  	var building, floor; 
-				var map, infowindow, markers;
+			  	// var building, floor; 
+				var map, infowindow, markers, infoWindows; 
 				var geoLocatorMarker, geoLocatorInfoWindow;
 				var directionsService, directionsDisplay, currentLat, currentLng, currentPosition;
-
+				var campus;
 				// var locations = [
 				//   ['Main Building', 55.872084,  -4.288222, 1],
 				//   ['Boyd Orr', 55.873504, -4.292795, 2]
@@ -94,19 +98,22 @@
 				{{fountain.avgrating}},
 				{{fountain.popularity}},
 				'{{fountain.broken}}',
-				'{{fountain.building}}'
+				'{{fountain.building}}',
+				{{fountain.id}}
 				],
+
+
 
 				{% endfor %}
 				];
 
-				enable(); 
+				enableFloor(); 
 
 				function initMap() {
 
 					  map = new google.maps.Map(document.getElementById('map'), {
 					 // zoom: 16,
-					  center: new google.maps.LatLng(55.872084, -4.288222),
+					  center: new google.maps.LatLng(55.872084,-4.288222),
 					  mapTypeId: google.maps.MapTypeId.ROADMAP,
 					  styles: [
 							{
@@ -199,6 +206,8 @@
 						]
 					  });
 
+					 campus  = new google.maps.LatLng(55.872084,-4.288222);
+
 					 directionsDisplay = new google.maps.DirectionsRenderer();
 					 directionsService = new google.maps.DirectionsService();
 					
@@ -211,13 +220,20 @@
 
 				function loadAll()
 				{	
-					markers = [];
 					var marker, i;
-						infowindow = new google.maps.InfoWindow({
+
+					markers = [];
+					infoWindows = [];
+
+					infowindow = new google.maps.InfoWindow({
 							maxWidth: 200
-						});
-						for (i = 0; i < locations.length; i++) {  
-							  marker = new google.maps.Marker({
+					});
+
+					infoWindows.push(infowindow);
+					infoWindows.push(geoLocatorInfoWindow);
+
+					for (i = 0; i < locations.length; i++) {  
+							   	marker = new google.maps.Marker({
 								position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 								map: map,
 								building: locations[i][12],
@@ -230,7 +246,10 @@
 							// photo " + locations[i][3]
 							  google.maps.event.addListener(marker, 'click', (function(marker, i) {
 								return function() {
-								  infowindow.setContent(
+
+								clearInfoWindows(); 
+
+								infowindow.setContent(
 								  	"<h4>" + locations[i][0] + "</h4><br/>" + // name  
 								  	"<img width='150' src='" + "{{ MEDIA_URL}}" + locations[i][3] + "'" + "/></br></br>" + 
 								  	locations[i][4] + "<br/></br>" + // description
@@ -238,11 +257,11 @@
 								  	"<b>Floor: </b>" + locations[i][5] + "</br> "+ 
 								  	"<b>Rating: </b>" + locations[i][9] + "</br>" + 
 								  	"<b>Broken? </b>" + locations[i][11] + "</br></br>" +
-								  	"<b>Visit the fountain page to see the reviews!</b>"
+								  	"<b>Visit the " + "<a href ='/fountain/"+locations[i][13]+"'> fountain page</a> to see the reviews!</b>"
 								  	);
-								  infowindow.open(map, marker);
+								 infowindow.open(map, marker);
 
-								  var endPosition = locations[i]; 
+								 var endPosition = locations[i]; 
 
 									// current location to a fountain 
 								  
@@ -258,25 +277,29 @@
 					setBounds();	
 				}
 
-				function clearMarkers()
-				{
+				function clearMarkers() {
 					for (var i = 0; i < markers.length; i++) {
          			 markers[i].setVisible(false);
        				 }
 				}
 
-				function showAllMarkers()
-				{	
-					for (var i = 0; i < markers.length; i++) {
-         			 markers[i].setVisible(true);
+				function clearInfoWindows() {
+					for (var i = 0; i < infoWindows.length; i++) {
+         			 infoWindows[i].close();
        				 }
-
-       				 setBounds();
 
 				}
 
-				function sortMarkers()
-				{
+				function showAllMarkers(){		
+					clearInfoWindows(); 
+
+					for (var i = 0; i < markers.length; i++) {
+         			 markers[i].setVisible(true);
+       				 }
+       				setBounds();
+				}
+
+				function sortMarkers() {
 					showBuilding = document.getElementById("Building").value;
 					showFloor = document.getElementById("Floor").value;
 					
@@ -284,37 +307,42 @@
 					console.log(showFloor);
 
 					clearMarkers();
+					clearInfoWindows(); 
 
-					if (showBuilding == "all" && showFloor =="all"){
+					if (showBuilding == "all"){
 						showAllMarkers(); 
 					}
 
-					else if (showBuilding == "all"){
-						for (var i = 0; i < markers.length; i++) {
-							if (markers[i].floor == showFloor) {
+					else if (showFloor == "all") {
+						var i;
+						for (i = 0; i < markers.length; i++) {
+							if (markers[i].building == showBuilding) {
 								markers[i].setVisible(true);
-								setBounds();
-							}	
+								map.setCenter(markers[i].getPosition());
+								map.setZoom(17); 
+							} 
 						}
 					}
-
+					
 					else {
-						var m = -1; 
-						for (var i = 0; i < markers.length; i++) {
+						var i;
+						var f = false; 
+						for (i = 0; i < markers.length; i++) {
 							if (markers[i].building == showBuilding){
-								if (markers[i].floor == showFloor || showFloor == "all") {
-								markers[i].setVisible(true);
-								m = markers[i];
-
-								map.setZoom(17);
-								map.setCenter(m.getPosition());
+								if (markers[i].floor == showFloor){
+									markers[i].setVisible(true);
+									map.setCenter(markers[i].getPosition());
+									map.setZoom(17);
+									f = true;
 								}
-							}
+							} 	
 						}
-
-						if (m==-1){
-							setBounds();
+						
+						if (f == false) {
+							setBounds(); 
+							geoLocatorInfoWindow.setPosition(campus);
 							geoLocatorInfoWindow.setContent("Sorry, couldn't locate any fountains! </br></br> Try selecting a different floor or a building."); 
+							geoLocatorInfoWindow.open(map);
 						}
 					}
 
@@ -427,15 +455,14 @@
 				// if geolocation disabled 
 				function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow) {
 					
-					var pos = new google.maps.LatLng(55.872084, -4.288222);
-					geoLocatorInfoWindow.setPosition(pos);
+					geoLocatorInfoWindow.setPosition(campus);
 					geoLocatorInfoWindow.setContent(browserHasGeolocation ?
 								  'Error: The Geolocation service failed.' :
 								  'Error: Your browser doesn\'t support geolocation.'); 
 					geoLocatorInfoWindow.open(map);
 				}
 
-				function enable(){
+				function enableFloor(){
 					if (document.getElementById("Building").value == "all") {
 						document.getElementById("Floor").disabled=true;
 					}else{
@@ -454,7 +481,7 @@
 
 		<div class = "col-sm">
 		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	</div>
+		</div>
 
 </div>
 

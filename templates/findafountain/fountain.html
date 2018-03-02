@@ -3,29 +3,48 @@
 
 {% block titleblock %}Home{% endblock %}
 
-{% block content %}
-<div class = "jumbotron">
-	<h1><b>Home</b></h1>
-</div>
+{% block title %}
+	<h1>Find a Fountain</h1>
+	<p class="lead"><b>Created by The Thirsty Pythons</b></p>
+{% endblock %}
 
-<div class = "gridtwo">	
-	<div class = "left">
+{% block content %}
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="{% static 'js/markerclusterer/src/markerclusterer.js' %}" ></script> 
+
+<style>
+ #map {
+	   width: 100%;
+	   height: 500px;
+	 }
+</style>
+
+<div class = "container-fluid">
+	<div class = "row">
+
+	<div class = "col-sm">
 		<h1><b>Fountain name goes here</b></h1>
 		</br>
 		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
 		<b>Rating:</b> </br>
 		<b>Add to profile button</b>
-
 	</div>
-	<div class = "center2">
+
+<div class="col-6">
+	
 		<h2><b>Find this fountain on a map:</b></h2>
 		
 		<img src = "{% static 'img/University-of-Glasgow-Map.jpg' %}" alt = "Map of the University of Glasgow" style ="width:700px;height:500px;">
-	</div>
 
-	<div class="right">
+		 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+		</script>
+
+</div>
+
+		<div class = "col-sm">
 		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	</div>
+		</div>
 
 </div>
 
