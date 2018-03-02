@@ -27,8 +27,8 @@
 		<h4><b>Found a Fountain?</b></h4>
 		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
 		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
-		<b>Fountain of the Week:</b>
-		Congratulations to the Library 4th floor fountain.
+		<b>Fountain of the Week:</b><br/>
+		Congratulations to the Library 4th floor fountain. <br/>
 		Voted: Most clean, Best stocked, and Easiest to Find
 		</div>
 
@@ -257,7 +257,7 @@
 								  	"<b>Floor: </b>" + locations[i][5] + "</br> "+ 
 								  	"<b>Rating: </b>" + locations[i][9] + "</br>" + 
 								  	"<b>Broken? </b>" + locations[i][11] + "</br></br>" +
-								  	"<b>Visit the " + "<a href ='/fountain/"+locations[i][13]+"'> fountain page</a> to see the reviews!</b>"
+								  	"<b>Visit the " + "<a href ='/fountain/"+locations[i][13]+"'> fountain page</a> to see the reviews or rate this fountain!</b>"
 								  	);
 								 infowindow.open(map, marker);
 
