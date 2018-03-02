@@ -44,7 +44,7 @@
 			<button type="button" class="btn btn-primary" alt="Search: " align="center">
 				
 				<b>Show building: </b>
-					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers()">
+					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers(), enable()">
 						<option value="all">All</option>{% for fountain in fountains %}
 						<option value="{{fountain.building}}">{{fountain.building}}</option>
 						{% endfor %}
@@ -69,7 +69,7 @@
 			  <script type="text/javascript">
 
 			  	var building, floor; 
-				var map, infoWindow, markers;
+				var map, infowindow, markers;
 				var geoLocatorMarker, geoLocatorInfoWindow;
 				var directionsService, directionsDisplay, currentLat, currentLng, currentPosition;
 
@@ -99,6 +99,8 @@
 
 				{% endfor %}
 				];
+
+				enable(); 
 
 				function initMap() {
 
@@ -211,7 +213,7 @@
 				{	
 					markers = [];
 					var marker, i;
-						var infowindow = new google.maps.InfoWindow({
+						infowindow = new google.maps.InfoWindow({
 							maxWidth: 200
 						});
 						for (i = 0; i < locations.length; i++) {  
@@ -283,17 +285,39 @@
 
 					clearMarkers();
 
-					for (var i = 0; i < markers.length; i++) {
-						if (markers[i].building == showBuilding) {
-							markers[i].setVisible(true);
-						}
+					if (showBuilding == "all" && showFloor =="all"){
+						showAllMarkers(); 
+					}
 
-						if (markers[i].floor == showFloor) {
-							markers[i].setVisible(true)
+					else if (showBuilding == "all"){
+						for (var i = 0; i < markers.length; i++) {
+							if (markers[i].floor == showFloor) {
+								markers[i].setVisible(true);
+								setBounds();
+							}	
 						}
 					}
 
-					map.setCenter(showBuilding[1],showBuilding[2]);
+					else {
+						var m = -1; 
+						for (var i = 0; i < markers.length; i++) {
+							if (markers[i].building == showBuilding){
+								if (markers[i].floor == showFloor || showFloor == "all") {
+								markers[i].setVisible(true);
+								m = markers[i];
+
+								map.setZoom(17);
+								map.setCenter(m.getPosition());
+								}
+							}
+						}
+
+						if (m==-1){
+							setBounds();
+							geoLocatorInfoWindow.setContent("Sorry, couldn't locate any fountains! </br></br> Try selecting a different floor or a building."); 
+						}
+					}
+
 				}
 
 				function findNearest()
@@ -411,6 +435,13 @@
 					geoLocatorInfoWindow.open(map);
 				}
 
+				function enable(){
+					if (document.getElementById("Building").value == "all") {
+						document.getElementById("Floor").disabled=true;
+					}else{
+						document.getElementById("Floor").disabled=false;
+					}
+				}
 
 			  </script>
 
