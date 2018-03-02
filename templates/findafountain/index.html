@@ -17,8 +17,7 @@
 <style>
  #map {
 	   width: 100%;
-	   height: 100%;
-	   overflow: hidden;
+	   height: 500px;
 	 }
 </style>
 
@@ -104,8 +103,8 @@
 				function initMap() {
 
 					  map = new google.maps.Map(document.getElementById('map'), {
-					  zoom: 16,
-					 // center: new google.maps.LatLng(55.872084, -4.288222),
+					 // zoom: 16,
+					  center: new google.maps.LatLng(55.872084, -4.288222),
 					  mapTypeId: google.maps.MapTypeId.ROADMAP,
 					  styles: [
 							{
@@ -198,7 +197,6 @@
 						]
 					  });
 
-
 					 directionsDisplay = new google.maps.DirectionsRenderer();
 					 directionsService = new google.maps.DirectionsService();
 					
@@ -245,7 +243,7 @@
 								  var endPosition = locations[i]; 
 
 									// current location to a fountain 
-								  locateUser(); 
+								  
 								  calcRoute(directionsService, directionsDisplay, endPosition);
 								}
 							  })(marker, i));
@@ -271,7 +269,8 @@
          			 markers[i].setVisible(true);
        				 }
 
-       				setBounds(); 
+       				 setBounds();
+
 				}
 
 				function sortMarkers()
@@ -293,6 +292,8 @@
 							markers[i].setVisible(true)
 						}
 					}
+
+					map.setCenter(showBuilding[1],showBuilding[2]);
 				}
 
 				function findNearest()
@@ -328,6 +329,9 @@
 					    clearMarkers();
 					    markers[closest].visible = true;
 					    var endPosition = locations[closest]; 
+
+					    google.maps.event.trigger(markers[closest], 'click');
+
 					    calcRoute(directionsService, directionsDisplay, endPosition);
 					}
 				}
@@ -384,7 +388,8 @@
 					}
 						});
 
-					setBounds(); 
+					map.setZoom(17);
+					map.setCenter(new google.maps.LatLng(lat1,lng1));
 
 				}
 
