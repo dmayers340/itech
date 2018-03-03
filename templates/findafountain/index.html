@@ -16,34 +16,38 @@
 <style>
  #map {
 	   width: 100%;
-	   height: 500px;
+	   height: 90%;
 	 }
 </style>
 
 <div class = "container-fluid">
-		<div class = "row">
+	<div class = "row">
 
 		<div class = "col-sm">
-		<h4><b>Found a Fountain?</b></h4>
-		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
-		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
+		<h4><b><br/>Found a Fountain?</b></h4>
+		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b>  <hr>
+
+		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br /><hr>
 		<b>Fountain of the Week:</b><br/>
-		Congratulations to the Library 4th floor fountain. <br/>
+		Congratulations to the Library 4th floor fountain. 
 		Voted: Most clean, Best stocked, and Easiest to Find
 		</div>
 
-<div class="col-6">
-		<b>Thirsty? You came to the right page! <br/> Click on any of the fountains to get directions or select one of the options below.</b> <br/>
-		<br/>  
-			
-			<button type="button" class="btn btn-primary" alt="Show all" align="left" onclick="showAllMarkers()">
+		<div class="col-6">
+
+		<br/>  	
+			<button type="button" class="btn-custom" alt="Show all" align="center" onclick="showAllMarkers()">
 				<b>Show all</b>
 			</button> 
 
-			<button type="button" class="btn btn-primary" alt="Search: " align="center">
+			<button type="button" class="btn-custom" alt="Find nearest" align="centert" onclick="findNearest()">
+				<b>Show nearest<b>  
+	 		</button> 
+
+			<button type="button" class="btn-custom" alt="Search: " align="center">
 				
-				<b>Show building: </b> 
-					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers(), enableFloor()">
+				<b>Building: </b> 
+					<select id ="Building" class ="btn-basic" onchange="sortMarkers(), enableFloor()">
 						<option value="all">All</option>
 						{% for fountain in fountains %}
 						{% if fountain.building %}
@@ -53,8 +57,8 @@
 					</select>
 				 
 
-				<b>Show floor: </b>
-					<select id ="Floor" class ="btn btn-basic" onchange="sortMarkers()">
+				<b>Floor: </b>
+					<select id ="Floor" class ="btn-basic" onchange="sortMarkers()">
 						<option value="all">All</option>
 						{% for floor in floors %}
 						{% if floor.floor %}
@@ -64,10 +68,6 @@
 					</select>
 			</button> 
 
-      <button type="button" class="btn btn-primary" alt="Find nearest" align="right" onclick="findNearest()">
-				<b>Show nearest<b>  
-			</button> 
-
 			<br/><br/>
 			<div id="map">
 			  <script type="text/javascript">
@@ -75,8 +75,9 @@
 			  	// var building, floor; 
 				var map, infowindow, markers, infoWindows; 
 				var geoLocatorMarker, geoLocatorInfoWindow;
-				var directionsService, directionsDisplay, currentLat, currentLng, currentPosition;
-				var campus;
+				var directionsService, directionsDisplay, currentLat, currentLng, currentPosition, pos;
+				var campus; 
+
 				// var locations = [
 				//   ['Main Building', 55.872084,  -4.288222, 1],
 				//   ['Boyd Orr', 55.873504, -4.292795, 2]
@@ -214,8 +215,9 @@
 					 geoLocatorInfoWindow = new google.maps.InfoWindow;
 					 geoLocatorMarker = new google.maps.Marker({map: map});
 
-					 locateUser();
-					 loadAll();			
+					 locateUser(); 
+					 loadAll();
+					 showGreeting();
 				} 
 
 				function loadAll()
@@ -241,9 +243,8 @@
 								icon: {url: "{% static 'img/icon.svg' %}",
 								scaledSize: new google.maps.Size(60, 50)},
 								visible: true
-							  });
-
-							// photo " + locations[i][3]
+							  }); 
+							 
 							  google.maps.event.addListener(marker, 'click', (function(marker, i) {
 								return function() {
 
@@ -251,7 +252,7 @@
 
 								infowindow.setContent(
 								  	"<h4>" + locations[i][0] + "</h4><br/>" + // name  
-								  	"<img width='150' src='" + "{{ MEDIA_URL}}" + locations[i][3] + "'" + "/></br></br>" + 
+								  	"<img width='150' src='" + "{{ MEDIA_URL}}" + locations[i][3] + "'" + "/><hr>" + 
 								  	locations[i][4] + "<br/></br>" + // description
 								  	"<b>Building: </b>" + locations[i][12] + "</br>" +
 								  	"<b>Floor: </b>" + locations[i][5] + "</br> "+ 
@@ -445,11 +446,26 @@
 
 				function setBounds() {
 					var bounds = new google.maps.LatLngBounds();
-					bounds.extend(geoLocatorMarker.getPosition());
 					for (var i =0; i<markers.length; i++) {
 						bounds.extend(markers[i].getPosition());
 					}
 					map.fitBounds(bounds);
+				}
+
+				function enableFloor(){
+					if (document.getElementById("Building").value == "all") {
+						document.getElementById("Floor").disabled=true;
+					}else{
+						document.getElementById("Floor").disabled=false;
+					}
+				}
+
+				function showGreeting(){
+					var infowindow2 = new google.maps.InfoWindow({
+							maxWidth: 200});
+					infowindow2.setPosition(campus);
+					infowindow2.setContent("<h5>Welcome to<h5>Find A Fountain!</h5><hr><font size='3'>Select one of the options above or click on any of the fountains to get directions, rate a fountain, leave a review, and more. <hr> Just keep in mind that location services are needed to fully enjoy this site.</font>");
+					infowindow2.open(map);
 				}
 
 				// if geolocation disabled 
@@ -462,13 +478,7 @@
 					geoLocatorInfoWindow.open(map);
 				}
 
-				function enableFloor(){
-					if (document.getElementById("Building").value == "all") {
-						document.getElementById("Floor").disabled=true;
-					}else{
-						document.getElementById("Floor").disabled=false;
-					}
-				}
+
 
 			  </script>
 
@@ -478,9 +488,8 @@
 		</div>
 
 	</div>
-
-		<div class = "col-sm">
-		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<div class = "col-sm2">
+		<a class="twitter-timeline" data-width="300" data-height="700" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</div>
 
 </div>

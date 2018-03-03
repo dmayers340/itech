@@ -14,7 +14,7 @@ def index(request):
 	context_dict = {'fountains': fountain_list, 'floors': floor_list}
 	return render(request, 'findafountain/index.html', context_dict)
 
-def fountain(request, fountain_id_slug):
+def get_fountain(request, fountain_id_slug):
 	context_dict = {}
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
