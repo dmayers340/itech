@@ -1,0 +1,306 @@
+{% extends 'findafountain/base.html' %}
+{% load staticfiles %}
+
+{% block titleblock %}Home{% endblock %}
+
+{% block title %}
+	<h1>Find a Fountain</h1>
+	<p class="lead"><b>Created by The Thirsty Pythons</b></p>
+{% endblock %}
+
+{% block content %}
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="{% static 'js/markerclusterer/src/markerclusterer.js' %}" ></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<link rel="stylesheet" href="font-awesome.min.css">
+
+<style>
+ #map {
+	   width: 100%;
+	   height: 100%;
+	 }
+</style>
+
+<div class = "container-fluid">
+	<div class = "row">
+
+		<div class = "col-sm">
+		<br/> <h2><b>{{fountain.name}}</b></h2> 
+		<img width=300 height="auto" src='{{ MEDIA_URL}}{{fountain.image}}'/><br/> 
+
+		<hr><b> Rating: </b>
+
+			 <div id ="rating" style="font-size:1.5em; color: gold "> 
+
+
+			<script type="text/javascript"> 
+					printRating();
+					function printRating() {
+		   			var x ="", i;
+		   			for (i=1; i<={{fountain.avgrating}}; i++) {
+		       			 x = x + "<i class='fas fa-star'></i> ";  
+		   			 }		
+		    		document.getElementById("rating").innerHTML = x;
+				}
+			</script>
+
+			</div>
+
+			{{fountain.reviews}} reviews
+
+			<br/>
+
+			<hr> {{fountain.description}} <br/> <hr>
+			<b>Building: </b>{{fountain.building}} <br/>
+			<b>Floor: </b>{{fountain.floor}} <br/>
+			<b>Broken: </b>{{fountain.broken}} <br/><br/>
+
+			</div>
+
+		<div class="col-6">
+
+			<br/> 
+			<div id="map">
+				 <script type="text/javascript">
+
+				 var map, marker;
+				 var geoLocatorMarker, geoLocatorInfoWindow;
+				 var directionsService, directionsDisplay, currentLat, currentLng, currentPosition;
+				 var campus;
+
+				function initMap() {
+				 	map = new google.maps.Map(document.getElementById('map'), {
+						  center: new google.maps.LatLng(55.872084,-4.288222),
+						  mapTypeId: google.maps.MapTypeId.ROADMAP,
+						  styles: [
+								{
+									"featureType": "landscape.man_made",
+									"elementType": "all",
+									"stylers": [
+										{
+											"color": "#faf5ed"
+										},
+										{
+											"lightness": "0"
+										},
+										{
+											"gamma": "1"
+										}
+									]
+								},
+								{
+									"featureType": "poi.park",
+									"elementType": "geometry.fill",
+									"stylers": [
+										{
+											"color": "#bae5a6"
+										}
+									]
+								},
+								{
+									"featureType": "road",
+									"elementType": "all",
+									"stylers": [
+										{
+											"weight": "1.00"
+										},
+										{
+											"gamma": "1.8"
+										},
+										{
+											"saturation": "0"
+										}
+									]
+								},
+								{
+									"featureType": "road",
+									"elementType": "geometry.fill",
+									"stylers": [
+										{
+											"hue": "#ffb200"
+										}
+									]
+								},
+								{
+									"featureType": "road.arterial",
+									"elementType": "geometry.fill",
+									"stylers": [
+										{
+											"lightness": "0"
+										},
+										{
+											"gamma": "1"
+										}
+									]
+								},
+								{
+									"featureType": "transit.station.airport",
+									"elementType": "all",
+									"stylers": [
+										{
+											"hue": "#b000ff"
+										},
+										{
+											"saturation": "23"
+										},
+										{
+											"lightness": "-4"
+										},
+										{
+											"gamma": "0.80"
+										}
+									]
+								},
+								{
+									"featureType": "water",
+									"elementType": "all",
+									"stylers": [
+										{
+											"color": "#a0daf2"
+										}
+									]
+								}
+							]
+						  });
+
+						 campus = new google.maps.LatLng(55.872084,-4.288222);
+
+						 directionsDisplay = new google.maps.DirectionsRenderer();
+						 directionsService = new google.maps.DirectionsService();
+						
+						 geoLocatorInfoWindow = new google.maps.InfoWindow;
+						 geoLocatorMarker = new google.maps.Marker({map: map});
+
+						 loadLocation(); 
+						 locateUser(); 
+						 calcRoute(directionsService, directionsDisplay); 
+					}
+
+					function loadLocation(){
+
+						marker = new google.maps.Marker({
+									position: new google.maps.LatLng({{fountain.lat}}, {{fountain.lng}}),
+									map: map,
+									icon: {url: "{% static 'img/icon.svg' %}",
+									scaledSize: new google.maps.Size(60, 50)},
+									visible: true
+								  });
+
+					}
+
+					function calcRoute(directionsService, directionsDisplay) {
+						
+						directionsDisplay.setMap(map);
+
+						var request = {
+							origin: new google.maps.LatLng(currentPosition),
+							destination: new google.maps.LatLng({{fountain.lat}},{{fountain.lng}}),
+							travelMode: 'WALKING'
+						};
+						
+						directionsService.route(request, function (result, status) {
+						if (status == 'OK') {
+						directionsDisplay.setOptions({ preserveViewport: true });
+						directionsDisplay.setDirections(result);
+						} else {
+						directionsDisplay.setOptions({ preserveViewport: true });
+						}
+							});
+
+						map.setZoom(17);
+						map.setCenter(new google.maps.LatLng({{fountain.lat}},{{fountain.lng}}));
+
+					}
+
+					function locateUser(){ 
+								if (navigator.geolocation) {
+
+									  navigator.geolocation.getCurrentPosition(function(position) {
+										currentPosition = {
+										  lat: position.coords.latitude,
+										  lng: position.coords.longitude
+										};
+
+										currentLat = position.coords.latitude;
+										currentLng = position.coords.longitude;
+										var pos = new google.maps.LatLng(currentPosition);
+										
+										geoLocatorMarker.setPosition(pos);
+										geoLocatorInfoWindow.setContent('Your location');
+										geoLocatorInfoWindow.open(map, geoLocatorMarker);
+
+									}, function() {
+									handleLocationError(true, infoWindow);
+									});
+								} else {
+								  // Browser doesn't support Geolocation
+								  handleLocationError(false, infoWindow);
+							}
+					}
+
+	 
+					function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow) {
+						
+						geoLocatorInfoWindow.setPosition(campus);
+						geoLocatorInfoWindow.setContent(browserHasGeolocation ?
+									  'Error: The Geolocation service failed.' :
+									  'Error: Your browser doesn\'t support geolocation.'); 
+						geoLocatorInfoWindow.open(map);
+					}
+
+		</script>
+
+		<script async defer
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+		</script>
+
+	
+		</div><br/> 
+
+		</div>
+	
+		<div class = "col-sm2">
+		<br/> <h2><b>Reviews</b></h2>
+
+		This text is keeping the box wide wide wide wide 
+
+		<hr>
+		<div>
+
+		<textarea name="Review" rows="5" cols="35">Do you enjoy using this fountain? Let us know.
+		</textarea>
+
+		<br/>
+		<br/> 
+
+		<button type="button" class="btn-custom" alt="Leave a review">
+		<b>	Submit a review </b>
+		</button> 
+
+		<button type="button" class="btn-custom" alt="Rate this fountain">
+				<b> Rate:   </b>
+
+				<select id ="Rate" class ="btn-basic">
+					<option value="1"> 1 </option>
+					<option value="2"> 2 </option>
+					<option value="3"> 3  </option>
+					<option value="4"> 4 </option>
+					<option value="5"> 5 </option>
+				</select>
+		</button>
+
+		<br/>
+		<br/>
+
+		<button type="report" class="btn-custom-red" alt="Report broken">
+		<b>	Report a broken fountain</b>
+		</button>
+
+		</div>
+
+	</div>
+
+</div>
+
+{% endblock %}
