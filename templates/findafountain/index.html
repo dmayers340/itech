@@ -31,8 +31,8 @@
 
 		{% for review in reviews %}
 		<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
-		<div style="text-align:left"> <b> {{review.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}'>{{review.fountain.name}} fountain</a> <br/>
-		<div style ="color:gray"> {{review.datetime}}<br/> <br/></div>
+		<div style="text-align:left"> <b> {{review.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}'>{{review.fountain.name}}</a> fountain<br/>
+		<div style ="color:gray"> {{review.datetime}}<br/></div>
 		<b> "{{review.title}}" </b> <br/>
 		{{review.text}}</div> <br/> <hr>
 		{% endfor %} 

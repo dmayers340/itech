@@ -11,7 +11,7 @@
 #1.) ModelForm-helper class to create form from pre-existing model
 from django import forms
 from django.contrib.auth.models import User
-from findafountain.models import UserProfile
+from findafountain.models import UserProfile, Fountain, Review
 
 
 class UserForm(forms.ModelForm):
