@@ -7,25 +7,21 @@ head {
 
 body, html {
   padding: 0px;
-  margin: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 0px;
-  margin-left: 0px;
-  background-color:#fff;
-
+  background-color:#F0F0F0;
 }
 
 footer{
   bottom:0;
+  background-color:#4d94ff;
+  color:#000;
+  margin-right:20px;
+  margin-left:20px;
 }
 
 header {
-  padding: 50px;
-  margin-top:0px;
-  margin-left:1px;
+  padding: 40px;
   color: #000;
-  background-image: url(../img/logo.png);
+  background-color:#4d94ff;
   background-repeat: no-repeat;
   background-size:auto auto;
   background-position:left;
@@ -34,6 +30,57 @@ header {
   border: #ddd  1px solid;
   border-color:#000;  
   vertical-align: bottom;
+}
+
+.navbar {
+  padding:10px;
+  margin:0px;
+  margin-left:20px;
+  margin-right:20px;
+  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;   
+}
+
+.navbar-default{
+  color:#000;
+  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-left:20px;
+  margin-right:20px; 
+}
+
+.starter-template {
+  text-align: center;
+  margin-left:20px;
+  margin-right:20px;
+  border: #ddd  1px solid;
+  border-color:#000;
+}
+
+.col-sm{
+  border: #ddd  1px solid;
+  border-color:#000;  
+}
+
+  .footer{
+    bottom:0;
+    position:absolute;
+  }
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+.fa-github {
+    background: black;
+    color: white;
 }
 
 .button1 {
@@ -90,55 +137,12 @@ header {
   background-color: #FF6656;;
 }
 
-.grid{
-  display: grid;
-  grid-gap: 50px 100px;
-  grid-template-columns: auto auto auto;
-  padding:10px;
-  margin-top:50px;
-  text-align: center;
-}
-
-.gridtwo{
-  display: grid;
-  grid-gap: 50px 100px;
-  grid-template-columns: auto auto auto;
-  padding:10px;
-  margin-top:50px;
-  text-align: center;
-}
-
-.navbar {
-  padding:10px;
-  margin:0px;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 20px;   
-}
-
-.navbar-default{
-  color:#000;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 20px; 
-}
-
 .registration{
   text-align:center;
   margin:50px;
 }
 .content{
   height: 100%;
-}
-
-.starter-template {
-  text-align: center;
 }
 
 .form{
@@ -155,46 +159,6 @@ header {
   padding-top:0;
 }
 
-
-.left{
-  float:left;
-  text-align:center;
-  border: #ddd  1px solid;
-  border-color:#000;
-  background-color:#8292fd;
-
-}
-
-.right{
-  float:right;
-  padding:0px;
-  margin:0px;
-  border: #ddd  1px solid;
-  border-color:#000;
-  height:100%;
-  background-color:#8292fd;
-}
-
-.jumbotron{
-  top:0;
-  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 20px;  
-  width:100%;
-  margin-top:0px;
-  margin-bottom:0px;
-  margin-left:0px;
-  margin-right:0px;
-  padding-right:0px;
-  padding-left:0px;
-  padding-top:5px;
-  padding-bottom:5px;
-  text-align:center;
-  background-color:#82fdee;
-}
 .center2{
   float: center;
 }
@@ -226,9 +190,4 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-
-  .footer{
-    bottom:0;
-    position:absolute;
   }
