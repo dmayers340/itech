@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
 	username = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Username'}))
 	class Meta:
 		model = User
-		fields =('username', 'email',)
+		fields =('username', 'email', 'password') 
 		labels={'email':'',}
 		widgets ={
 			#'username': forms.TextInput(attrs={'help_text':None, 'size':40, 'placeholder':'Username'}),

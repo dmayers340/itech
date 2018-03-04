@@ -7,18 +7,22 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
+from findafountain.models import Review
 
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
 	floor_list = Fountain.objects.order_by('floor').distinct()
-	context_dict = {'fountains': fountain_list, 'floors': floor_list}
+	review_list = Review.objects.order_by('datetime')
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list}
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
 	context_dict = {}
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
+		reviews = Review.objects.filter(fountain=fountain_id_slug)
 		context_dict['fountain'] = fountain
+		context_dict['reviews'] = reviews
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
 	return render(request, 'findafountain/fountain.html', context_dict)

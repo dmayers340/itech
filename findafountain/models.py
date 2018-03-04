@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify 
+from django.utils import timezone
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	picture = models.ImageField(upload_to='profile_images', blank=True)
+	picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
 
 	def __str__(self):
 		return self.user.username
@@ -20,7 +21,7 @@ class Fountain(models.Model):
 	reviews = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
 	numberratings = models.IntegerField(default=0)
-	avgrating = models.FloatField(default=0)
+	avgrating = models.FloatField(blank=True, null=True)
 	popularity = models.IntegerField(default=0)
 	broken = models.BooleanField(default='false')
 	building = models.CharField(max_length=32, unique=False)
@@ -31,7 +32,19 @@ class Fountain(models.Model):
 		super(Fountain, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.name 
+		return self.name
+
+class Review(models.Model):
+	title = models.CharField(max_length=32, unique=False) 
+	datetime = models.DateTimeField(("Date"), default=timezone.now())
+	text = models.CharField(max_length=250, unique=False) 
+	user = models.ForeignKey(UserProfile)
+	fountain = models.ForeignKey(Fountain)
+
+	def __str__(self):
+		return self.title
+
+
 	 
 
 # Create your models here.

@@ -28,8 +28,10 @@
 		<div class = "col-sm">
 		<br/> <h2><b>{{fountain.name}}</b></h2> 
 		<img width=300 height="auto" src='{{ MEDIA_URL}}{{fountain.image}}'/><br/> 
+ 		<hr>
 
-		<hr><b> Rating: </b>
+ 		{% if fountain.avgrating%}
+ 		<b> Rating: </b>
 
 			 <div id ="rating" style="font-size:1.5em; color: gold "> 
 
@@ -46,15 +48,27 @@
 			</script>
 
 			</div>
+		{% else %}
+			There aren't any ratings yet. <br/>
+		{% endif %}
 
-			{{fountain.reviews}} reviews
+
+			Reviews: {{reviews|length}}  
 
 			<br/>
 
 			<hr> {{fountain.description}} <br/> <hr>
 			<b>Building: </b>{{fountain.building}} <br/>
 			<b>Floor: </b>{{fountain.floor}} <br/>
-			<b>Broken: </b>{{fountain.broken}} <br/><br/>
+			<b>Broken: </b>
+
+			{% if fountain.broken %}
+			Yes 
+			{% else %}
+			No
+			{% endif %}
+
+			<br/><br/>
 
 			</div>
 
@@ -260,15 +274,26 @@
 
 		</div>
 	
-		<div class = "col-sm2">
-		<br/> <h2><b>Reviews</b></h2>
+		<div class = "col-sm2" style="max-width: 400px; padding:20px;" >
 
-		This text is keeping the box wide wide wide wide 
+			<h2><b>Reviews</b></h2><hr>
+			
+			<div class = "col-sm2" style="max-height: 300px; overflow:auto;"" > 
+				{% if reviews %}
+				{% for review in reviews %}
+				<b> "{{review.title}}" </b> <br/>
+				<b> {{review.user}}</b>, {{review.datetime}}<br/> <br/>
+				{{review.text}} <br/> 
+				{% endfor %}
+				{% else %}
+				This fountain has no reviews. 
+				{% endif %}
+			</div> 
 
 		<hr>
-		<div>
 
-		<textarea name="Review" rows="5" cols="35">Do you enjoy using this fountain? Let us know.
+		<div>
+		<textarea name="Review" rows="5" cols="35" style="padding: 10px">Do you enjoy using this fountain? Enter your opinion here and click on the "Submit a review" button when done.
 		</textarea>
 
 		<br/>
