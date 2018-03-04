@@ -203,14 +203,12 @@ label:hover:before {
 
 .col-sm{
   width: 100%; 
-  margin:0px 0px 0px 2%; 
   border: #f1f1f1 1px solid;
   border-color: #f1f1f1; 
   background-color: #fff;
 }
 
 .col-sm2{
-  margin:0px 0% 0px 0px; 
   border: #f1f1f1 1px solid;
   border-color: #f1f1f1;
   background-color: #fff;
