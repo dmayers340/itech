@@ -1,0 +1,423 @@
+{% extends 'findafountain/base.html' %}
+{% load staticfiles %}
+
+{% block titleblock %}Home{% endblock %}
+
+{% block title %}
+	<h1>Find a Fountain</h1>
+	<p class="lead"><b>Created by The Thirsty Pythons</b></p>
+{% endblock %}
+
+
+{% block content %}
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="{% static 'js/markerclusterer/src/markerclusterer.js' %}" ></script> 
+
+<style>
+ #map {
+	   width: 700px;
+	   height: 500px;
+	 }
+</style>
+
+<div class = "container-fluid">
+		<div class = "row">
+
+		<div class = "col-sm">
+		<h4><b>Found a Fountain?</b></h4>
+		<b>Signup and submit via the <a href = "{% url 'contact' %}" > Submit </a> page.</b> </br>
+		<img src = "{% static 'img/libraryfountain.jpg' %}" alt = "Image of Library Fountain" style ="width:300px;height:400px;"><br />
+		<b>Fountain of the Week:</b>
+		Congratulations to the Library 4th floor fountain.
+		Voted: Most clean, Best stocked, and Easiest to Find
+	</div>
+
+<div class="col-6">
+		<b>Thirsty? You came to the right page! <br/> Click on any of the fountains to get directions or select one of the options below.</b> <br/>
+		<br/>  
+			
+			<button type="button" class="btn btn-primary" alt="Show all" align="left" onclick="showAllMarkers()">
+				<b>Show all</b>
+			</button> 
+
+			<button type="button" class="btn btn-primary" alt="Search: " align="center">
+				
+				<b>Show building: </b>
+					<select id ="Building" class ="btn btn-basic" onchange="sortMarkers()">
+						<option value="all">All</option>{% for fountain in fountains %}
+						<option value="{{fountain.building}}">{{fountain.building}}</option>
+						{% endfor %}
+					</select>
+
+				<b>Show floor: </b>
+					<select id ="Floor" class ="btn btn-basic" onchange="sortMarkers()">
+						<option value="all">All</option>
+						{% for fountain in fountains %}
+						<option value="{{fountain.floor}}">{{fountain.floor}}</option>
+						{% endfor %}
+					</select>
+
+			</button> 
+
+      <button type="button" class="btn btn-primary" alt="Find nearest" align="right" onclick="findNearest()">
+				<b>Show nearest<b>  
+			</button> 
+
+			<br/><br/>
+			<div id="map">
+			  <script type="text/javascript">
+
+			  	var building, floor; 
+				var map, infoWindow, markers;
+				var geoLocatorMarker, geoLocatorInfoWindow;
+				var directionsService, directionsDisplay, currentLat, currentLng, currentPosition;
+
+				// var locations = [
+				//   ['Main Building', 55.872084,  -4.288222, 1],
+				//   ['Boyd Orr', 55.873504, -4.292795, 2]
+				// ];
+
+				var locations = [
+
+				{% for fountain in fountains %}
+
+				['{{fountain.name}}',
+				{{fountain.lat}},
+				{{fountain.lng}}, 
+				'{{fountain.image}}',
+				'{{fountain.description}}',
+				{{fountain.floor}},
+				{{fountain.reviews}},
+				{{fountain.rating}},
+				{{fountain.numberratings}},
+				{{fountain.avgrating}},
+				{{fountain.popularity}},
+				'{{fountain.broken}}',
+				'{{fountain.building}}'
+				],
+
+				{% endfor %}
+				];
+
+				function initMap() {
+
+					  directionsService = new google.maps.DirectionsService();
+					  directionsDisplay = new google.maps.DirectionsRenderer();
+
+					  map = new google.maps.Map(document.getElementById('map'), {
+					  zoom: 16,
+					  center: new google.maps.LatLng(55.872084, -4.288222),
+					  mapTypeId: google.maps.MapTypeId.ROADMAP,
+					  styles: [
+							{
+								"featureType": "landscape.man_made",
+								"elementType": "all",
+								"stylers": [
+									{
+										"color": "#faf5ed"
+									},
+									{
+										"lightness": "0"
+									},
+									{
+										"gamma": "1"
+									}
+								]
+							},
+							{
+								"featureType": "poi.park",
+								"elementType": "geometry.fill",
+								"stylers": [
+									{
+										"color": "#bae5a6"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "all",
+								"stylers": [
+									{
+										"weight": "1.00"
+									},
+									{
+										"gamma": "1.8"
+									},
+									{
+										"saturation": "0"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "geometry.fill",
+								"stylers": [
+									{
+										"hue": "#ffb200"
+									}
+								]
+							},
+							{
+								"featureType": "road.arterial",
+								"elementType": "geometry.fill",
+								"stylers": [
+									{
+										"lightness": "0"
+									},
+									{
+										"gamma": "1"
+									}
+								]
+							},
+							{
+								"featureType": "transit.station.airport",
+								"elementType": "all",
+								"stylers": [
+									{
+										"hue": "#b000ff"
+									},
+									{
+										"saturation": "23"
+									},
+									{
+										"lightness": "-4"
+									},
+									{
+										"gamma": "0.80"
+									}
+								]
+							},
+							{
+								"featureType": "water",
+								"elementType": "all",
+								"stylers": [
+									{
+										"color": "#a0daf2"
+									}
+								]
+							}
+						]
+					  });
+
+					 geoLocatorInfoWindow = new google.maps.InfoWindow;
+
+					 locateUser();
+					 loadAll();			
+				} 
+
+				function loadAll()
+				{	
+					directionsDisplay.setMap(null);
+
+					markers = [];
+					var marker, i;
+						var infowindow = new google.maps.InfoWindow({
+							maxWidth: 200
+						});
+						for (i = 0; i < locations.length; i++) {  
+							  marker = new google.maps.Marker({
+								position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+								map: map,
+								building: locations[i][12],
+								floor: locations[i][5],
+								icon: markerSymbol('dodgerblue'),
+								visible: true
+							  });
+
+							// photo " + locations[i][3]
+							  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+								return function() {
+								  infowindow.setContent(
+								  	"<h4>" + locations[i][0] + "</h4><br/>" + // name  
+								  	"<img width='150' src='" + "{{ MEDIA_URL}}" + locations[i][3] + "'" + "/></br></br>" + 
+								  	locations[i][4] + "<br/></br>" + // description
+								  	"<b>Building: </b>" + locations[i][12] + "</br>" +
+								  	"<b>Floor: </b>" + locations[i][5] + "</br> "+ 
+								  	"<b>Rating: </b>" + locations[i][9] + "</br>" + 
+								  	"<b>Broken? </b>" + locations[i][11] + "</br></br>" +
+								  	"<b>Visit the fountain page to see the reviews!</b>"
+								  	);
+								  infowindow.open(map, marker);
+
+								  var endPosition = locations[i]; 
+
+									// current location to a fountain 
+								  locateUser(); 
+								  calcRoute(directionsService, directionsDisplay, endPosition);
+								}
+							  })(marker, i));
+
+							  markers.push(marker);
+							}
+					var markerCluster = new MarkerClusterer(map, markers, {imagePath: "{% static 'js/markerclusterer/images/m' %}"});		
+				}
+
+				function clearMarkers()
+				{
+					for (var i = 0; i < markers.length; i++) {
+         			 markers[i].setVisible(false);
+       				 }
+				}
+
+				function showAllMarkers()
+				{	
+					for (var i = 0; i < markers.length; i++) {
+         			 markers[i].setVisible(true);
+       				 }
+				}
+
+				function sortMarkers()
+				{
+					showBuilding = document.getElementById("Building").value;
+					showFloor = document.getElementById("Floor").value;
+					
+					console.log(showBuilding);
+					console.log(showFloor);
+
+					clearMarkers();
+
+					for (var i = 0; i < markers.length; i++) {
+						if (markers[i].building == showBuilding) {
+							markers[i].setVisible(true);
+						}
+
+						if (markers[i].floor == showFloor) {
+							markers[i].setVisible(true)
+						}
+					}
+				}
+
+				function findNearest()
+				{	
+					locateUser(); 
+
+					var pi = Math.PI;
+				    var R = 6371; //equatorial radius
+				    var distances = [];
+				    var closest = -1;
+
+				    for( i=0;i<markers.length; i++ ) {  
+				        var lat2 = markers[i].position.lat();
+				        var lon2 = markers[i].position.lng();
+
+				        var chLat = lat2-currentLat;
+				        var chLon = lon2-currentLng;
+
+				        var dLat = chLat*(pi/180);
+				        var dLon = chLon*(pi/180);
+
+				        var rLat1 = currentLat*(pi/180);
+				        var rLat2 = lat2*(pi/180);
+
+				        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+				                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(rLat1) * Math.cos(rLat2); 
+				        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				        var d = R * c;
+
+				        distances[i] = d;
+				        if ( closest == -1 || d < distances[closest] ) {
+				            closest = i;
+				        }
+ 
+					    clearMarkers();
+					    markers[closest].visible = true;
+					    var endPosition = locations[closest]; 
+					    calcRoute(directionsService, directionsDisplay, endPosition);
+					}
+				}
+   
+				function locateUser() 
+				{
+						// Try HTML5 geolocation.
+							if (navigator.geolocation) {
+
+								  navigator.geolocation.getCurrentPosition(function(position) {
+									currentPosition = {
+									  lat: position.coords.latitude,
+									  lng: position.coords.longitude
+									};
+
+									currentLat = position.coords.latitude;
+									currentLng = position.coords.longitude;
+
+									geoLocatorMarker = new google.maps.Marker({
+									position: new google.maps.LatLng(currentPosition),
+									map: map,
+								  });
+									
+									geoLocatorInfoWindow.setContent('Your location');
+									geoLocatorInfoWindow.open(map, geoLocatorMarker);
+									map.setCenter(currentPosition);
+
+								}, function() {
+								handleLocationError(true, infoWindow);
+								});
+							} else {
+							  // Browser doesn't support Geolocation
+							  handleLocationError(false, infoWindow);
+						}
+				}
+
+				function calcRoute(directionsService, directionsDisplay, endPoint) {
+					
+					directionsDisplay.setMap(map);	
+
+					var lat1 = endPoint[1];
+					var lng1 = endPoint[2];
+
+					var request = {
+						origin: new google.maps.LatLng(currentPosition),
+						destination: new google.maps.LatLng(lat1,lng1),
+						travelMode: 'WALKING'
+					};
+					
+					directionsService.route(request, function (result, status) {
+					if (status == 'OK') {
+					directionsDisplay.setOptions({ preserveViewport: true });
+					directionsDisplay.setDirections(result);
+					} else {
+					directionsDisplay.setOptions({ preserveViewport: true });
+					}
+						});
+				}
+
+				// if geolocation disabled 
+				function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow) {
+					
+					var pos = new google.maps.LatLng(55.872084, -4.288222);
+					geoLocatorInfoWindow.setPosition(pos);
+					geoLocatorInfoWindow.setContent(browserHasGeolocation ?
+								  'Error: The Geolocation service failed.' :
+								  'Error: Your browser doesn\'t support geolocation.'); 
+					geoLocatorInfoWindow.open(map);
+				}
+
+
+				function markerSymbol(color) {
+					return {
+						path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+						fillColor: color,
+						fillOpacity: 1,
+						strokeColor: 'white',
+						strokeWeight: 2,
+						scale: 1
+							};
+				}
+
+			  </script>
+
+			 <script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+			 </script>
+		</div>
+
+	</div>
+
+		<div class = "col-sm">
+		<a class="twitter-timeline" data-width="300" data-height="600" href="https://twitter.com/fountain_finder?ref_src=twsrc%5Etfw">Tweets by fountain_finder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
+
+</div>
+
+{% endblock %}
