@@ -36,7 +36,7 @@ class Fountain(models.Model):
 
 class Review(models.Model):
 	title = models.CharField(max_length=32, unique=False) 
-	datetime = models.DateTimeField(("Date"), default=timezone.now())
+	datetime = models.DateTimeField(("Date"), default=django.utils.timezone.now)
 	text = models.CharField(max_length=250, unique=False) 
 	user = models.ForeignKey(UserProfile)
 	fountain = models.ForeignKey(Fountain)

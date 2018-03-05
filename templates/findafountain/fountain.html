@@ -113,10 +113,6 @@
 						
 					directionsDisplay.setMap(map);
 
-					console.log("routing...");
-					console.log("currentPosition" +  currentPosition);
-
-
 					var request = {
 						origin: new google.maps.LatLng(currentPosition),
 						destination: new google.maps.LatLng({{fountain.lat}},{{fountain.lng}}),
@@ -125,11 +121,8 @@
 					
 					directionsService.route(request, function(result, status) { 
 							if (status == 'OK') {
-							console.log("routing request received...");
-							console.log(result);
 							directionsDisplay.setOptions({ preserveViewport: true });
 							directionsDisplay.setDirections(result);
-							console.log("routing complete.");
 						}  
 					});
 
