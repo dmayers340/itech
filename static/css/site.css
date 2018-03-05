@@ -7,7 +7,7 @@ head {
 
 body, html {
   padding: 0px;
-  background: linear-gradient(to bottom, #4885ed, #ffffff);
+  background: #f1f1f1;
 }
 
 footer{
@@ -25,6 +25,7 @@ header {
   bottom:0;
   left:0;
   vertical-align: bottom;
+  background-color: #4885ed;
 }
 
 .navbar {
@@ -58,6 +59,10 @@ header {
   margin-right:20px;
 }
 
+.col-sm{
+  border:#ffffff  2px solid;
+  border-color:#ffffff;  
+}
 
 .col-left{
   position:left;
