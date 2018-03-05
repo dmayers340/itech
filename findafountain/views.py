@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
-from findafountain.forms import UserForm, UserProfileForm
+from findafountain.forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
 from findafountain.models import Review
+from django.utils import timezone
 
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
@@ -17,7 +18,19 @@ def index(request):
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
+	if request.method == "POST":
+		review_form = ReviewForm(request.POST)
+	else: 
+		review_form = ReviewForm()
+		if review_form.is_valid():
+	  		review = review_form.save(commit=False)
+	  		review.user = request.user
+	  		review.datetime = timezone.now()
+	  		review.fountain = fountain_id_slug
+	  		review.save()
+
 	context_dict = {}
+
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
 		reviews = Review.objects.filter(fountain=fountain_id_slug)
@@ -25,7 +38,7 @@ def get_fountain(request, fountain_id_slug):
 		context_dict['reviews'] = reviews
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
-	return render(request, 'findafountain/fountain.html', context_dict)
+	return render(request, 'findafountain/fountain.html', context_dict, {'review_form': review_form})
 
 def about(request):
 	return render(request, 'findafountain/about.html')
@@ -37,8 +50,7 @@ def contact(request):
 	return render(request, 'findafountain/contact.html')
 
 def submit(request):
-	return render(request, 'findafountain/submit.html')
-	
+	return render(request, 'findafountain/submit.html')	
 
 def register(request):
 	registered=False

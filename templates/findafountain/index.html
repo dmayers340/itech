@@ -31,7 +31,7 @@
 
 		{% for review in reviews %}
 		<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
-		<div style="text-align:left"> <b> {{review.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}'>{{review.fountain.name}}</a> fountain<br/>
+		<div style="text-align:left"> <b> {{review.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}' method='post'>{{review.fountain.name}}</a> fountain<br/>
 		<div style ="color:gray"> {{review.datetime}}<br/></div>
 		<b> "{{review.title}}" </b> <br/>
 		{{review.text}}</div> <br/> <hr>
@@ -138,95 +138,6 @@
 					 // zoom: 16,
 					  center: new google.maps.LatLng(55.872084,-4.288222),
 					  mapTypeId: google.maps.MapTypeId.ROADMAP,
-					  styles: [
-							{
-								"featureType": "landscape.man_made",
-								"elementType": "all",
-								"stylers": [
-									{
-										"color": "#faf5ed"
-									},
-									{
-										"lightness": "0"
-									},
-									{
-										"gamma": "1"
-									}
-								]
-							},
-							{
-								"featureType": "poi.park",
-								"elementType": "geometry.fill",
-								"stylers": [
-									{
-										"color": "#bae5a6"
-									}
-								]
-							},
-							{
-								"featureType": "road",
-								"elementType": "all",
-								"stylers": [
-									{
-										"weight": "1.00"
-									},
-									{
-										"gamma": "1.8"
-									},
-									{
-										"saturation": "0"
-									}
-								]
-							},
-							{
-								"featureType": "road",
-								"elementType": "geometry.fill",
-								"stylers": [
-									{
-										"hue": "#ffb200"
-									}
-								]
-							},
-							{
-								"featureType": "road.arterial",
-								"elementType": "geometry.fill",
-								"stylers": [
-									{
-										"lightness": "0"
-									},
-									{
-										"gamma": "1"
-									}
-								]
-							},
-							{
-								"featureType": "transit.station.airport",
-								"elementType": "all",
-								"stylers": [
-									{
-										"hue": "#b000ff"
-									},
-									{
-										"saturation": "23"
-									},
-									{
-										"lightness": "-4"
-									},
-									{
-										"gamma": "0.80"
-									}
-								]
-							},
-							{
-								"featureType": "water",
-								"elementType": "all",
-								"stylers": [
-									{
-										"color": "#a0daf2"
-									}
-								]
-							}
-						]
 					  });
 
 					 campus  = new google.maps.LatLng(55.872084,-4.288222);

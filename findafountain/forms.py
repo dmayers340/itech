@@ -12,6 +12,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from findafountain.models import UserProfile, Fountain, Review
+from django.utils import timezone
 
 
 class UserForm(forms.ModelForm):
@@ -31,3 +32,10 @@ class UserProfileForm(forms.ModelForm):
 		model = UserProfile
 		#fields = ('website', 'picture')
 		fields = ('picture',)
+
+class ReviewForm(forms.ModelForm):
+	title = forms.CharField()
+	text = forms.CharField(widget=forms.Textarea)
+	class Meta:
+		model = Review
+		fields =('title', 'text',)
