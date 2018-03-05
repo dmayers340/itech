@@ -13,7 +13,7 @@ from django.utils import timezone
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
 	floor_list = Fountain.objects.order_by('floor').distinct()
-	review_list = Review.objects.order_by('datetime')
+	review_list = Review.objects.order_by('-datetime')
 	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list}
 	return render(request, 'findafountain/index.html', context_dict)
 
@@ -33,7 +33,7 @@ def get_fountain(request, fountain_id_slug):
 
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
-		reviews = Review.objects.filter(fountain=fountain_id_slug)
+		reviews = Review.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
 		context_dict['fountain'] = fountain
 		context_dict['reviews'] = reviews
 	except Fountain.DoesNotExist: 

@@ -190,14 +190,12 @@
 				<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
 				<div style="text-align:left"> <b> "{{review.title}}" </b> <br/>
 				<b> {{review.user}}</b>, <font style ="color:gray"> {{review.datetime}}</font>
-				{{review.text}}<br/> </div>
+				{{review.text}}<br/> </div><hr>
 				{% endfor %}
 				{% else %}
-				This fountain has no reviews. 
+				This fountain has no reviews. <hr>
 				{% endif %}
 			</div> 
-
-		<hr>
 
 		<div>
 
