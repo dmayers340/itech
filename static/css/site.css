@@ -26,6 +26,7 @@ header {
   left:0;
   vertical-align: bottom;
   background-color: #4885ed;
+  background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
 .navbar {
