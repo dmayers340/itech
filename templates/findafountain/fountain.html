@@ -200,17 +200,16 @@
 		<div>
 
 			<form id="review" method="post" enctype="multipart/form-data">
-
+				hi
 				{% csrf_token %}
 
-				{% for field in review_form %}
-				{{ field }}
-				{% endfor %}
 
-			 	{{ review_form }}
-			 	 
-			 	<textarea name="Review" method="post" rows="5" cols="35" style="padding: 10px">Do you enjoy using this fountain? Enter your opinion here and click on the "Submit a review" button when done.
-				</textarea>
+				{{ review_form.as_p}}
+
+	
+			 	 bye
+			 	<!-- <textarea name="Review" method="post" rows="5" cols="35" style="padding: 10px">Do you enjoy using this fountain? Enter your opinion here and click on the "Submit a review" button when done.
+				</textarea> -->
 
 				<br/>
 			 

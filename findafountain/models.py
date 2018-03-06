@@ -16,14 +16,14 @@ class Fountain(models.Model):
 	lng = models.FloatField()
 	image = models.ImageField(upload_to='fountain_images', blank=False, default='fountain_images/default2.jpg')
 	description = models.CharField(max_length=250, unique=False)
-	floor = models.IntegerField(default=0)
+	floor = models.IntegerField(default=0, null=True)
 	reviews = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
 	numberratings = models.IntegerField(default=0)
 	avgrating = models.FloatField(blank=True, null=True)
 	popularity = models.IntegerField(default=0)
 	broken = models.BooleanField(default='false')
-	building = models.CharField(max_length=32, unique=False)
+	building = models.CharField(max_length=32, unique=False, null=True)
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):

@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from findafountain.models import Fountain
 from findafountain.models import Review
 from findafountain.models import Rating
+from findafountain.models import UserProfile
 from django.utils import timezone
 
 def index(request):
@@ -36,15 +37,15 @@ def index(request):
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
+	review_form = ReviewForm()
+
 	if request.method == "POST":
 		review_form = ReviewForm(request.POST)
-	else: 
-		review_form = ReviewForm()
 		if review_form.is_valid():
 	  		review = review_form.save(commit=False)
-	  		review.user = request.user
+	  		review.user = UserProfile.objects.get(user=request.user)
 	  		review.datetime = timezone.now()
-	  		review.fountain = fountain_id_slug
+	  		review.fountain = Fountain.objects.get(id=fountain_id_slug)
 	  		review.save()
 
 	context_dict = {}
@@ -57,10 +58,13 @@ def get_fountain(request, fountain_id_slug):
 		context_dict['fountain'] = fountain
 		context_dict['reviews'] = reviews
 		context_dict['ratings'] = ratings
+		context_dict['review_form'] = review_form
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
 
-	return render(request, 'findafountain/fountain.html', context_dict, {'review_form': review_form})
+
+
+	return render(request, 'findafountain/fountain.html', context_dict)
 
 def about(request):
 	return render(request, 'findafountain/about.html')
