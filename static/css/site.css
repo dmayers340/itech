@@ -29,6 +29,11 @@ header {
   background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
+.imgFull{
+  width:100%;
+  height:auto;
+}
+
 .navbar {
   padding:10px;
   margin:0px;
