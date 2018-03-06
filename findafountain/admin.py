@@ -1,5 +1,5 @@
 from django.contrib import admin
-from findafountain.models import UserProfile, Fountain, Review
+from findafountain.models import UserProfile, Fountain, Review, Rating
 
 class CategoryAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('id',)}
@@ -8,3 +8,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile)
 admin.site.register(Fountain)
 admin.site.register(Review)
+admin.site.register(Rating)

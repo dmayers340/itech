@@ -10,7 +10,6 @@ class UserProfile(models.Model):
 	def __str__(self):
 		return self.user.username
 
-
 class Fountain(models.Model):
 	name = models.CharField(max_length=32, unique=False)
 	lat = models.FloatField()
@@ -44,7 +43,13 @@ class Review(models.Model):
 	def __str__(self):
 		return self.title
 
+class Rating(models.Model): 
+	datetime = models.DateTimeField(("Date"), default=timezone.now)
+	points = models.IntegerField(default=0, blank=False, null=False)
+	user = models.ForeignKey(UserProfile)
+	fountain = models.ForeignKey(Fountain, related_name='+')
 
-	 
+	def __str__(self):
+		return self.id 
 
 # Create your models here.

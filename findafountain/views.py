@@ -8,13 +8,31 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
 from findafountain.models import Review
+from findafountain.models import Rating
 from django.utils import timezone
 
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
 	floor_list = Fountain.objects.order_by('floor').distinct()
-	review_list = Review.objects.order_by('-datetime')
-	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list}
+	reviews = Review.objects.order_by('-datetime')
+	ratings = Rating.objects.order_by('-datetime')
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, }
+
+	# activity_list = [] 
+	# for review in review_list:
+	# 	activity_list.append(review)
+	# for rating in rating_list:
+	# 	activity_list.append(rating)
+
+	# recent_activity = activity_list.order_by('-datetime')
+
+	review_list=list(reviews)
+	rating_list=list(ratings)
+	recent_activity = sum([review_list, rating_list], [])
+	recent_activity.sort(key=lambda item: item.datetime, reverse=True)
+
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list, 'recent_activity': recent_activity}
+
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
@@ -34,10 +52,14 @@ def get_fountain(request, fountain_id_slug):
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
 		reviews = Review.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
+		ratings = Rating.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
+
 		context_dict['fountain'] = fountain
 		context_dict['reviews'] = reviews
+		context_dict['ratings'] = ratings
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
+
 	return render(request, 'findafountain/fountain.html', context_dict, {'review_form': review_form})
 
 def about(request):
