@@ -12,6 +12,7 @@ from findafountain.models import Rating
 from findafountain.models import UserProfile
 from django.utils import timezone
 
+
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
 	floor_list = Fountain.objects.order_by('floor').distinct()
@@ -127,3 +128,11 @@ def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('index'))
 
+
+def page_not_found(request):
+	data = {}
+	return render(request, 'findafountain/404.html', data)
+
+def server_error(request):
+	data = {}
+	return render(request, 'findafountain/500.html', data)

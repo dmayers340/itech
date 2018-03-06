@@ -29,13 +29,18 @@ header {
   background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
+.imgFull{
+  width:100%;
+  height:auto;
+}
+
 .navbar {
   padding:10px;
   margin:0px;
   margin-left:20px;
   margin-right:20px;
   font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
@@ -75,13 +80,12 @@ header {
   }
 
 .fa-twitter {
-  background: #000;
-  color: white;
-  display: inline-block;
-  border-radius: 60px;
-  box-shadow: 0px 0px 2px #888;
-  padding: 0.5em 0.6em;
-
+    background: #55ACEE;
+    color: white;
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
 }
 
 .fa-github {

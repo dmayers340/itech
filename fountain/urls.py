@@ -18,6 +18,10 @@ from django.contrib import admin
 from findafountain import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404, handler500
+
+handler404 = views.page_not_found
+handler500 = views.server_error
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
@@ -26,3 +30,5 @@ urlpatterns = [
         views.get_fountain, name='fountain'),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
