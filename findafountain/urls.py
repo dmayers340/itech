@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from findafountain import views
 
-handler404 = 'views.page_not_found'
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
