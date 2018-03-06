@@ -50,8 +50,7 @@
      <b>Or use the form below:</b>
   </div>
   <div style="margin:5px 0 0 0">
-	<form id = "user_form" method="post" action="{% url 'register' %}"
-	enctype="multipart/form-data">
+	<form id = "user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
 	{% csrf_token %}
 
 <!-- Display each form -->

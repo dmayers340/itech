@@ -54,6 +54,7 @@ def get_fountain(request, fountain_id_slug):
 			review.datetime = timezone.now()
 			review.fountain = Fountain.objects.get(id=fountain_id_slug)
 			review.save()
+			return HttpResponseRedirect(reverse('index'))
 		else:
 			if rating_form.is_valid():
 				print('hey hey')
