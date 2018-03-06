@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
-from findafountain.forms import UserForm, UserProfileForm, ReviewForm
+from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -39,16 +39,22 @@ def index(request):
 
 def get_fountain(request, fountain_id_slug):
 	review_form = ReviewForm()
+	rating_form = RatingForm()
 
 	if request.method == "POST":
 		review_form = ReviewForm(request.POST)
+		rating_form = RatingForm(request.POST)
 		if review_form.is_valid():
-	  		review = review_form.save(commit=False)
-	  		review.user = UserProfile.objects.get(user=request.user)
-	  		review.datetime = timezone.now()
-	  		review.fountain = Fountain.objects.get(id=fountain_id_slug)
-	  		review.save()
-
+			review = review_form.save(commit=False)
+			review.user = UserProfile.objects.get(user=request.user)
+			review.datetime = timezone.now()
+			review.fountain = Fountain.objects.get(id=fountain_id_slug)
+			review.save()
+		if rating_form.is_valid():
+			points = rating_form.save(commit=False)
+			rating.user = UserProfile.objects.get(user=request.user)
+			review.datetime = timezone.now()
+			review.fountain = Fountain.objects.get(id=fountain_id_slug)
 	context_dict = {}
 
 	try: 
@@ -60,10 +66,9 @@ def get_fountain(request, fountain_id_slug):
 		context_dict['reviews'] = reviews
 		context_dict['ratings'] = ratings
 		context_dict['review_form'] = review_form
+		context_dict['rating_form'] = rating_form
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
-
-
 
 	return render(request, 'findafountain/fountain.html', context_dict)
 

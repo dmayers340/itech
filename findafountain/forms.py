@@ -11,7 +11,7 @@
 #1.) ModelForm-helper class to create form from pre-existing model
 from django import forms
 from django.contrib.auth.models import User
-from findafountain.models import UserProfile, Fountain, Review
+from findafountain.models import UserProfile, Fountain, Review, Rating
 from django.utils import timezone
 
 
@@ -39,3 +39,9 @@ class ReviewForm(forms.ModelForm):
 	class Meta:
 		model = Review
 		fields =('title', 'text',)
+
+class RatingForm (forms.ModelForm):
+	points = forms.ChoiceField(choices=[(x,x) for x in range (1,5)])
+	class Meta: 
+		model = Review
+		fields = ('points',)

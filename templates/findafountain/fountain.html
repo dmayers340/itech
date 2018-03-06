@@ -201,7 +201,7 @@
 			<hr> 
 			<h2><b>Leave a review</b></h2>
 			<form id="review" method="post" enctype="multipart/form-data">
-				
+				 
 				<div align=center>
 					{% csrf_token %}
 					{{ review_form.as_p}}
@@ -214,13 +214,9 @@
 				<button type="button" class="btn-custom" alt="Rate this fountain">
 						<b> Rate:   </b>
 
-						<select id ="Rate" class ="btn-basic">
-							<option value="1"> 1 </option>
-							<option value="2"> 2 </option>
-							<option value="3"> 3  </option>
-							<option value="4"> 4 </option>
-							<option value="5"> 5 </option>
-						</select>
+						{% csrf_token %}
+						{{ rating_form}}
+
 				</button>
 
 			</form>
