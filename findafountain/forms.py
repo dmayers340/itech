@@ -35,13 +35,13 @@ class UserProfileForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 	title = forms.CharField()
-	text = forms.CharField(widget=forms.Textarea(attrs={'cols': 35, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
+	review = forms.CharField(label = '', widget=forms.Textarea(attrs={'cols': 35, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
 	class Meta:
 		model = Review
-		fields =('title', 'text',)
+		fields =('title', 'review',)
 
 class RatingForm (forms.ModelForm):
-	points = forms.ChoiceField(choices=[(x,x) for x in range (1,5)])
+	rate = forms.ChoiceField(choices=[(x,x) for x in range (1,6)])
 	class Meta: 
-		model = Review
-		fields = ('points',)
+		model = Rating
+		fields = ('rate',)

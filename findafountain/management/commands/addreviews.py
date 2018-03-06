@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
 		review6 = Review(
 			title = 'Impossible to find',
-			text = 'What the what. Spend hours going in circles because this was behind a bookcase',
+			text = 'What the what. Spent hours going in circles because this was behind a bookcase',
 			fountain = Fountain.objects.get(id=8), 
 			user = UserProfile.objects.get(user=User.objects.get(id=1)), 
 			)

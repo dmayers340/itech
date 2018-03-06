@@ -183,7 +183,7 @@
 
 			<h2><b>Reviews</b></h2><hr>
 			
-			<div class = "col-sm2" style="max-height: 300px; overflow:auto;"" > 
+			<div class = "col-sm2" style="max-height: 300px; overflow:auto;" > 
 				{% if reviews %}
 				{% for review in reviews %}
 				<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
@@ -204,25 +204,27 @@
 				 
 				<div align=center>
 					{% csrf_token %}
-					{{ review_form.as_p}}
+					{{ review_form.as_p }}
 				</div>
 
 				<button type="submit" class="btn-custom" alt="Submit a review">
 						<b>	Submit a review </b>
 				</button> 	
+			</form>
 
-				<button type="button" class="btn-custom" alt="Rate this fountain">
-						<b> Rate:   </b>
+			<form id="rate" method="post">
 
+					<button type="submit" class="btn-custom" alt="Submit a rating">
+						Submit
+					</button> 
+				
 						{% csrf_token %}
-						{{ rating_form}}
-
-				</button>
-
+						{{ rating_form }}
 			</form>
 
 		<br/>
 
+		
 		<button type="report" class="btn-custom-red" alt="Report broken">
 		<b>	Report a broken fountain</b>
 		</button>

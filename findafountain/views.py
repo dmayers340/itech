@@ -18,7 +18,7 @@ def index(request):
 	floor_list = Fountain.objects.order_by('floor').distinct()
 	reviews = Review.objects.order_by('-datetime')
 	ratings = Rating.objects.order_by('-datetime')
-	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, }
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, 'ratings': ratings}
 
 	# activity_list = [] 
 	# for review in review_list:
@@ -38,6 +38,8 @@ def index(request):
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
+
+	context_dict = {}
 	review_form = ReviewForm()
 	rating_form = RatingForm()
 
@@ -45,17 +47,22 @@ def get_fountain(request, fountain_id_slug):
 		review_form = ReviewForm(request.POST)
 		rating_form = RatingForm(request.POST)
 		if review_form.is_valid():
+			print('reviewing')
+			review_form = ReviewForm(request.POST)
 			review = review_form.save(commit=False)
 			review.user = UserProfile.objects.get(user=request.user)
 			review.datetime = timezone.now()
 			review.fountain = Fountain.objects.get(id=fountain_id_slug)
 			review.save()
-		if rating_form.is_valid():
-			points = rating_form.save(commit=False)
-			rating.user = UserProfile.objects.get(user=request.user)
-			review.datetime = timezone.now()
-			review.fountain = Fountain.objects.get(id=fountain_id_slug)
-	context_dict = {}
+		else:
+			if rating_form.is_valid():
+				print('hey hey')
+				rating_form = RatingForm(request.POST)
+				rating = rating_form.save(commit=False)
+				rating.user = UserProfile.objects.get(user=request.user)
+				rating.datetime = timezone.now()
+				rating.fountain = Fountain.objects.get(id=fountain_id_slug)
+				rating.save() 
 
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
