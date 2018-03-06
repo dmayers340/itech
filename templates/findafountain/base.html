@@ -91,6 +91,13 @@
       </div>
       <hr>
     </header>
+    
+    {% block error %}
+    <div class = "imgFull">
+      <img src = "{% static 'img/fountain.jpg' %}" alt ="Image of a broken fountain"/>
+    </div>
+    {% endblock %}
+
 
       {% block content %} 
         <h1>Bootstrap starter template</h1>
