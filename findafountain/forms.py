@@ -35,7 +35,7 @@ class UserProfileForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 	title = forms.CharField()
-	text = forms.CharField(widget=forms.Textarea)
+	text = forms.CharField(widget=forms.Textarea(attrs={'cols': 35, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
 	class Meta:
 		model = Review
 		fields =('title', 'text',)
