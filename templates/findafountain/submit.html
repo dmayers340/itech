@@ -35,10 +35,15 @@
 
 		<br/> 
 
-			<input id="latitude" type="text" name="mail" size="25" placeholder="Latitude" style="margin:0 0 10px 0">
-			<input id="longitude" type="text" name="mail" size="25" placeholder="Longitude">
+			<input id="latitude" type="text" name="mail" size="40" placeholder="Latitude" style="margin:0 0 15px 0"><br/>
+			<input id="longitude" type="text" name="mail" size="40" placeholder="Longitude" style="margin:0 0 15px 0">
+			
+			<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ fountain_form.as_p }}
 			<input type="submit" name="submit" value="Submit" />
-	
+			</form>
+
 		<br/><br/>
 
 		<div id="map" div style="max-height: 600px">

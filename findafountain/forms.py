@@ -45,3 +45,13 @@ class RatingForm (forms.ModelForm):
 	class Meta: 
 		model = Rating
 		fields = ('rate',)
+
+class FountainForm (forms.ModelForm):
+	name = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Fountain name'}))
+	building = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Building'}))
+	floor = forms.IntegerField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Floor'}))
+	description = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Description'}))
+	class Meta:
+		model = Fountain
+		fields = ('name', 'building', 'floor', 'description')
+	

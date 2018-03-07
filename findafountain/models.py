@@ -22,7 +22,7 @@ class Fountain(models.Model):
 	numberratings = models.IntegerField(default=0)
 	avgrating = models.FloatField(blank=True, null=True)
 	popularity = models.IntegerField(default=0)
-	broken = models.BooleanField(default='false')
+	broken = models.BooleanField(default='False')
 	building = models.CharField(max_length=32, unique=False, null=True)
 	slug = models.SlugField()
 
