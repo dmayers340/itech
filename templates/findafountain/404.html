@@ -8,7 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<h1><b>Whoops. The fountain you seek does not exist. Try again.</b></h1>
+<h1><b>Whoops. The fountain you seek does not exist.<br />
+ Try again. Or Go Back To Our <a href = "{% url 'register' %}" >Homepage</a></b></h1>
 <div class = "imgFull">
 	<img src = "{% static 'img/fountain.jpg' %}"  alt="Image of a water fountain" height="350" width="300"/>
 </div>

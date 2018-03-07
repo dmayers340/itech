@@ -29,11 +29,17 @@ header {
   background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
+header img{
+  position:left;
+}
 .imgFull{
   width:100%;
   height:auto;
 }
 
+.faq{
+  text-align: left;
+}
 .navbar {
   padding:10px;
   margin:0px;
