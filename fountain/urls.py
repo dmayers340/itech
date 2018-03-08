@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^fountain/(?P<fountain_id_slug>[\w\-]+)/$', 
         views.get_fountain, name='fountain'),
     url(r'^admin/', admin.site.urls),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

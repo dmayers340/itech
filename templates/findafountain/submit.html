@@ -26,68 +26,10 @@
 
 <div>
 	{% if user.is_authenticated %}
-
 		<b style="font-size:25px">Please go ahead and submit your fountain.</b>
 
-		<br/>
-
-		<b style="font-size:18px"> Drag the marker to the location of the fountain. </b>
-
-		<br/> 
-
-		Latitude: <input id="latitude" type="text" name="mail" size="25">
-
-		<br/>
-
-		Longitude: <input id="longitude" type="text" name="mail" size="25">
-
-		<br/><br/>
-
-		<div id="map" div style="max-height: 600px">
-
-			  <script type="text/javascript">
-
-			  	var map, marker; 
-			  	var position, currentLatitude, currentLongitude;
-			  	var campus;
-
-				// initialises a new map 
-			  	function initMap() {
-			  		map = new google.maps.Map(document.getElementById('map'), {
-					  zoom: 17,
-					  mapTypeId: google.maps.MapTypeId.ROADMAP,
-					});
-
-				  	campus  = new google.maps.LatLng(55.872084,-4.288222);
-				  	map.setCenter(campus);
-
-				 	marker = new google.maps.Marker({
-				 		map: map, 
-				 		position: campus,
-				 		visible: true, 
-				 		draggable: true
-				 	}); 
-
-				 	google.maps.event.addListener(marker, 'dragend', function(marker){
-				        position = marker.latLng; 
-				        currentLatitude = position.lat();
-				        currentLongitude = position.lng();
-				        console.log(currentLatitude, currentLongitude);
-				        document.getElementById("latitude").value=currentLatitude;
-				        document.getElementById("longitude").value=currentLongitude;
-				     });
-				}
-
-			  </script>
-
-			  <!-- API key 
-			  DO NOT REMOVE no matter what -->
-			   <script async defer
-				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
-			   </script>
-
-		</div>
-
+		<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+		<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 	{% else %}
 		<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
