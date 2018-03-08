@@ -1,30 +1,82 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
-from findafountain.forms import UserForm, UserProfileForm
+from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
 from findafountain.models import Review
+from findafountain.models import Rating
+from findafountain.models import UserProfile
+from django.utils import timezone
+
 
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
 	floor_list = Fountain.objects.order_by('floor').distinct()
-	review_list = Review.objects.order_by('datetime')
-	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list}
+	reviews = Review.objects.order_by('-datetime')
+	ratings = Rating.objects.order_by('-datetime')
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, 'ratings': ratings}
+
+	# activity_list = [] 
+	# for review in review_list:
+	# 	activity_list.append(review)
+	# for rating in rating_list:
+	# 	activity_list.append(rating)
+
+	# recent_activity = activity_list.order_by('-datetime')
+
+	review_list=list(reviews)
+	rating_list=list(ratings)
+	recent_activity = sum([review_list, rating_list], [])
+	recent_activity.sort(key=lambda item: item.datetime, reverse=True)
+
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list, 'recent_activity': recent_activity}
+
 	return render(request, 'findafountain/index.html', context_dict)
 
 def get_fountain(request, fountain_id_slug):
+
 	context_dict = {}
+	review_form = ReviewForm()
+	rating_form = RatingForm()
+
+	if request.method == "POST":
+		review_form = ReviewForm(request.POST)
+		rating_form = RatingForm(request.POST)
+		if review_form.is_valid():
+			print('reviewing')
+			review_form = ReviewForm(request.POST)
+			review = review_form.save(commit=False)
+			review.user = UserProfile.objects.get(user=request.user)
+			review.datetime = timezone.now()
+			review.fountain = Fountain.objects.get(id=fountain_id_slug)
+			review.save()
+		else:
+			if rating_form.is_valid():
+				print('hey hey')
+				rating_form = RatingForm(request.POST)
+				rating = rating_form.save(commit=False)
+				rating.user = UserProfile.objects.get(user=request.user)
+				rating.datetime = timezone.now()
+				rating.fountain = Fountain.objects.get(id=fountain_id_slug)
+				rating.save() 
+
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
-		reviews = Review.objects.filter(fountain=fountain_id_slug)
+		reviews = Review.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
+		ratings = Rating.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
+
 		context_dict['fountain'] = fountain
 		context_dict['reviews'] = reviews
+		context_dict['ratings'] = ratings
+		context_dict['review_form'] = review_form
+		context_dict['rating_form'] = rating_form
 	except Fountain.DoesNotExist: 
 		context_dict['fountain'] = None
+
 	return render(request, 'findafountain/fountain.html', context_dict)
 
 def about(request):
@@ -37,8 +89,7 @@ def contact(request):
 	return render(request, 'findafountain/contact.html')
 
 def submit(request):
-	return render(request, 'findafountain/submit.html')
-	
+	return render(request, 'findafountain/submit.html')	
 
 def register(request):
 	registered=False
@@ -89,3 +140,11 @@ def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('index'))
 
+
+def page_not_found(request):
+	data = {}
+	return render(request, 'findafountain/404.html', data)
+
+def server_error(request):
+	data = {}
+	return render(request, 'findafountain/500.html', data)

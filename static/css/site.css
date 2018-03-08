@@ -7,13 +7,11 @@ head {
 
 body, html {
   padding: 0px;
-  background-color:#F0F0F0;
+  background: #f1f1f1;
 }
 
 footer{
   bottom:0;
-  background-color:#4d94ff;
-  color:#000;
   margin-right:20px;
   margin-left:20px;
 }
@@ -21,24 +19,34 @@ footer{
 header {
   padding: 40px;
   color: #000;
-  background-color:#4d94ff;
   background-repeat: no-repeat;
   background-size:auto auto;
   background-position:left;
   bottom:0;
   left:0;
-  border: #ddd  1px solid;
-  border-color:#000;  
   vertical-align: bottom;
+  background-color: #4885ed;
+  background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
+header img{
+  position:left;
+}
+.imgFull{
+  width:100%;
+  height:auto;
+}
+
+.faq{
+  text-align: left;
+}
 .navbar {
   padding:10px;
   margin:0px;
   margin-left:20px;
   margin-right:20px;
   font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
@@ -61,40 +69,38 @@ header {
   text-align: center;
   margin-left:20px;
   margin-right:20px;
-  border: #ddd  1px solid;
-  border-color:#000;
 }
 
 .col-sm{
-  border: #ddd  1px solid;
-  border-color:#000;  
+  border:#ffffff  2px solid;
+  border-color:#ffffff;  
 }
 
 .col-left{
   position:left;
 }
 
-  .footer{
-    bottom:0;
-    position:absolute;
+.footer{
+  bottom:0;
+  position:absolute;
   }
-  .fa-twitter {
-    background: #000;
+
+.fa-twitter {
+    background: #55ACEE;
     color: white;
     display: inline-block;
     border-radius: 60px;
     box-shadow: 0px 0px 2px #888;
     padding: 0.5em 0.6em;
-
 }
-.fa-github {
-    background: black;
-    color: white;
-    display: inline-block;
-    border-radius: 60px;
-    box-shadow: 0px 0px 2px #888;
-    padding: 0.5em 0.6em;
 
+.fa-github {
+  background: black;
+  color: white;
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  padding: 0.5em 0.6em;
 }
 
 .button1 {
@@ -105,6 +111,13 @@ header {
   text-decoration: none;
   display: inline-block;
   font-size: 16 px;
+}
+
+.review{
+  max-height: 450px; 
+  overflow:scroll;
+  padding: 15px; 
+  border: 1px solid gainsboro;"
 }
 
 .btn-custom{

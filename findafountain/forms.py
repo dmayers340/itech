@@ -11,7 +11,8 @@
 #1.) ModelForm-helper class to create form from pre-existing model
 from django import forms
 from django.contrib.auth.models import User
-from findafountain.models import UserProfile, Fountain, Review
+from findafountain.models import UserProfile, Fountain, Review, Rating
+from django.utils import timezone
 
 
 class UserForm(forms.ModelForm):
@@ -23,7 +24,7 @@ class UserForm(forms.ModelForm):
 		labels={'email':'',}
 		widgets ={
 			#'username': forms.TextInput(attrs={'help_text':None, 'size':40, 'placeholder':'Username'}),
-			'email': forms.TextInput(attrs={'size':40,'placeholder':'Email'}),
+			'email': forms.TextInput(attrs={'size':50,'placeholder':'Email'}),
 		}
 
 class UserProfileForm(forms.ModelForm):
@@ -31,3 +32,16 @@ class UserProfileForm(forms.ModelForm):
 		model = UserProfile
 		#fields = ('website', 'picture')
 		fields = ('picture',)
+
+class ReviewForm(forms.ModelForm):
+	title = forms.CharField()
+	review = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 40, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
+	class Meta:
+		model = Review
+		fields =('title', 'review',)
+
+class RatingForm (forms.ModelForm):
+	rate = forms.ChoiceField(choices=[(x,x) for x in range (1,6)])
+	class Meta: 
+		model = Rating
+		fields = ('rate',)

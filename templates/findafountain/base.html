@@ -66,15 +66,16 @@
           </div>
            
             <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href= "{% url 'logout' %}">Logout {{ user.username }}</a>
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href= "{% url 'register' %}">Sign up/Log in</a>
             </li>
-            {% if user.is_authenticated %}
-          <li class="nav-item">
-              <a class="nav-link" href= "{% url 'logout' %}">Logout</a>
-              {% endif %}
-            </li>
-           </ul>
+            {% endif %}
+          </ul>
          </div>
         </div>
       </div>
@@ -89,12 +90,14 @@
           {% endblock %}
         </div>
       </div>
+      <hr>
     </header>
 
       {% block content %} 
         <h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
       {% endblock %}
+
     </div>
     </div>
   </div>
