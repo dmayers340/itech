@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
-from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm
+from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm, FountainForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -54,6 +54,7 @@ def get_fountain(request, fountain_id_slug):
 			review.datetime = timezone.now()
 			review.fountain = Fountain.objects.get(id=fountain_id_slug)
 			review.save()
+			return HttpResponseRedirect(reverse('index'))
 		else:
 			if rating_form.is_valid():
 				print('hey hey')
@@ -63,7 +64,7 @@ def get_fountain(request, fountain_id_slug):
 				rating.datetime = timezone.now()
 				rating.fountain = Fountain.objects.get(id=fountain_id_slug)
 				rating.save() 
-
+				return HttpResponseRedirect(reverse('index'))
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
 		reviews = Review.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
@@ -89,7 +90,16 @@ def contact(request):
 	return render(request, 'findafountain/contact.html')
 
 def submit(request):
-	return render(request, 'findafountain/submit.html')	
+	if request.method =='POST':
+		fountain_form = FountainForm(data=request.POST)
+		if fountain_form.is_valid():
+			fountain = fountain_form.save()
+		else:
+			print(foutain_form.errors)
+	else:
+		fountain_form = FountainForm()
+
+	return render(request, 'findafountain/submit.html', {'fountain_form': fountain_form})	
 
 def register(request):
 	registered=False
