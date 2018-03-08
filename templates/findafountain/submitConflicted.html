@@ -26,23 +26,26 @@
 
 <div>
 	{% if user.is_authenticated %}
+<<<<<<< HEAD
 		<b style="font-size:25px">Please go ahead and submit your fountain.</b>
 
-<<<<<<< HEAD
+		<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+		<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+=======
+
+		<b style="font-size:25px">Please go ahead and submit your fountain.</b>
+
 		<br/>
 
 		<b style="font-size:18px"> Drag the marker to the location of the fountain. </b>
 
 		<br/> 
 
-			<input id="latitude" type="text" name="mail" size="40" placeholder="Latitude" style="margin:0 0 15px 0"><br/>
-			<input id="longitude" type="text" name="mail" size="40" placeholder="Longitude" style="margin:0 0 15px 0">
-			
-			<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ fountain_form.as_p }}
-			<input type="submit" name="submit" value="Submit" />
-			</form>
+		Latitude: <input id="latitude" type="text" name="mail" size="25">
+
+		<br/>
+
+		Longitude: <input id="longitude" type="text" name="mail" size="25">
 
 		<br/><br/>
 
@@ -91,11 +94,8 @@
 
 		</div>
 
-=======
-		<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-		<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
->>>>>>> 267a9d4583903410c491c418eefd426664366b7b
 
+>>>>>>> master
 	{% else %}
 		<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
 		<p><b style="font-size:25px">Login<a href= "{% url 'register' %}"> Here</a></b></p>
