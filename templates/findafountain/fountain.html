@@ -5,7 +5,7 @@
 
 {% block title %}
 	<h1>Find a Fountain</h1>
-	<p class="lead"><b>Created by The Thirsty Pythons</b></p>
+	<p><b>Created by The Thirsty Pythons</b></p>
 {% endblock %}
 
 {% block content %}
@@ -70,7 +70,7 @@
 
 			</div>
 
-		<div class="col-6">
+		<div class="col-6" style="border: 1px solid white;">
 
 			<br/> 
 			<div id="map">
@@ -82,12 +82,12 @@
 				 var campus;
 
 				function initMap() {
-				 	map = new google.maps.Map(document.getElementById('map'), {
-						  center: new google.maps.LatLng(55.872084,-4.288222),
-						  mapTypeId: google.maps.MapTypeId.ROADMAP,
-						  });
+				 	  map = new google.maps.Map(document.getElementById('map'), {
+					  mapTypeId: google.maps.MapTypeId.ROADMAP,
+					  });
 
-					campus = new google.maps.LatLng(55.872084,-4.288222);
+					campus  = new google.maps.LatLng(55.872084,-4.288222);
+					map.setCenter(campus);
 
 					directionsDisplay = new google.maps.DirectionsRenderer();
 					directionsService = new google.maps.DirectionsService();
@@ -153,16 +153,17 @@
 						calcRoute(directionsService, directionsDisplay); 
 
 					}, function() {
-					handleLocationError(true, infoWindow);
+					handleLocationError(true, geoLocatorInfoWindow);
 					});
 					} else {
 					  // Browser doesn't support Geolocation
-					  handleLocationError(false, infoWindow);
+					  handleLocationError(false, geoLocatorInfoWindow);
 					}
 				}
 
 				function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow) {	
 					var errorposition = new google.maps.LatLng({{fountain.lat}}, {{fountain.lng}});
+					geoLocatorInfoWindow = new google.maps.InfoWindow;
 					geoLocatorInfoWindow.setPosition(errorposition);
 					geoLocatorInfoWindow.setContent( 'Error: The Geolocation service failed.Your browser doesn\'t support geolocation.'); 
 					geoLocatorInfoWindow.open(map);
@@ -179,21 +180,23 @@
 
 		</div>
 	
-		<div class = "col-sm2" style="max-width: 400px; padding:20px;" >
+		<div class = "col-sm2" style="max-width: 400px; max-height: 700px; padding:20px; border: 1px solid white;" >
 
 			<h2><b>Reviews</b></h2><hr>
 			
-			<div class = "col-sm2" style="max-height: 300px; overflow:auto;" > 
-				{% if reviews %}
-				{% for review in reviews %}
-				<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
-				<div style="text-align:left"> <b> "{{review.title}}" </b> <br/>
-				<b> {{review.user}}</b>, <font style ="color:gray"> {{review.datetime}}</font>
-				{{review.text}}<br/> </div><hr>
-				{% endfor %}
-				{% else %}
-				This fountain has no reviews. <hr>
-				{% endif %}
+			<div class = "col-sm2" style="max-height: 300px; overflow:auto;padding: 15px; border: 1px solid gainsboro;" >
+
+					{% if reviews %}
+					{% for review in reviews %}
+					<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
+					<div style="text-align:left"> <b> "{{review.title}}" </b> <br/>
+					<b> {{review.user}}</b>, <font style ="color:gray"> {{review.datetime}}</font>
+					{{review.text}}<br/> </div><hr>
+					{% endfor %}
+					{% else %}
+					This fountain has no reviews. <hr>
+					{% endif %}
+				
 			</div> 
 
 		<div>
@@ -204,7 +207,7 @@
 				 
 				<div align=center>
 					{% csrf_token %}
-					{{ review_form.as_p }}
+					<b> {{ review_form.as_p }} </b>
 				</div>
 
 				<button type="submit" class="btn-custom" alt="Submit a review">

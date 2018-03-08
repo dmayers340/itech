@@ -5,17 +5,34 @@
 
 {% block title %}
 	<h1>About</h1>
-    <p class="lead"><b>Find Out More About the Thirsty Python Members</b></p>
+    <p><b>Find Out More About the Thirsty Python Members</b></p>
 {% endblock %}
+
 {% block content %}
+<h1><b>FAQ</b></h1>
+<div class = "faq">
+	<ul>
+		<li>
+			<h3><b>What is Find a Fountain?</b></h3><br />
+			<h5><b>Find a Fountain is a group project by the Thirsty Pythons for the Internet Technology course at the University of Glasgow</b></h5><br />
+		</li>
 
+		<li>
+			<h3><b>Why choose Find a Fountain?</b></h3><br />
+			<h5><b>As eco-friendly students, we bring our own reusable water bottles to campus, however, it can be difficult to find places to fill the water bottles up. We thought an app like Find a Fountain would help students find bubblers in order to drink more water</b></h5><br />
+		</li>
+
+		<li>
+			<h3><b>Who is part of Find a Fountain?</b></h3><br />
+			<h5><b>We are glad you asked! Find out about us below.</b></h5><br />
+	</li>
+	</ul>
+</div>
 <div class="body">
-	<center><b>Find a Fountain is a group project by the Thirsty Pythons for the Internet
-		Technology course at the University of Glasgow</b></center><br />
-
 	<div class = "container-fluid">
-		<div class = "row">
+		<h1><b>Members:</b></h1>
 
+		<div class = "row">
 		<div class = "col-sm">
 			<h4><b>Jemma</b></h4>
 			<p><img src= "{% static 'img/fountain7.jpg' %}" alt="Image of a water fountain" height="300" width="500"/></p>
@@ -29,13 +46,19 @@
 			<p>Avid traveller, art and tech enthusiast, social media marketing professional, 
 			retired event curator, foodie, runner, and dabbler in many other things.</p>
 		</div>
-		
+		</div>
+
+		<div class = "row">
 		<div class = "col-sm">
 			<h4><b>Deb</b></h4>
 			<p><img src= "{% static 'img/housesteads.png' %}" alt="Image of a water fountain" height="300" width="500"/></p>
 			<p>Interests in HCI, UX/UI, Roman Britain, Archaeology, Classics, Cognitive Science, VR, and AR. 
-			Currently developing a multisensory experience in VR.</p>
-			<p>Check out my website <a href= "http://debmayers.com"> Here </a></p>
+			Currently developing a multisensory <a href= "http://debmayers.com/mithraeum"> experience in VR.</a></p>
+			
+			Check out my <a href= "http://debmayers.com"> website </a> and follow me at the links below:<br />
+			<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+			<script type="IN/MemberProfile" data-id="https://www.linkedin.com/in/deborahmayers" data-format="hover" data-related="false" data-text="Deborah Mayers"></script><br />
+			<a href="https://twitter.com/debmayers24" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @debmayers24</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><br />
 		</div>
 		<div class = "col-sm">
 			<h4><b>Thirsty Python</b></h4>

@@ -29,11 +29,17 @@ header {
   background: linear-gradient(to bottom, #4885ed, #c9d6ff);
 }
 
+header img{
+  position:left;
+}
 .imgFull{
   width:100%;
   height:auto;
 }
 
+.faq{
+  text-align: left;
+}
 .navbar {
   padding:10px;
   margin:0px;
@@ -105,6 +111,13 @@ header {
   text-decoration: none;
   display: inline-block;
   font-size: 16 px;
+}
+
+.review{
+  max-height: 450px; 
+  overflow:scroll;
+  padding: 15px; 
+  border: 1px solid gainsboro;"
 }
 
 .btn-custom{

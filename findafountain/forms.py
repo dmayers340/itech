@@ -24,7 +24,7 @@ class UserForm(forms.ModelForm):
 		labels={'email':'',}
 		widgets ={
 			#'username': forms.TextInput(attrs={'help_text':None, 'size':40, 'placeholder':'Username'}),
-			'email': forms.TextInput(attrs={'size':40,'placeholder':'Email'}),
+			'email': forms.TextInput(attrs={'size':50,'placeholder':'Email'}),
 		}
 
 class UserProfileForm(forms.ModelForm):
@@ -35,7 +35,7 @@ class UserProfileForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 	title = forms.CharField()
-	review = forms.CharField(label = '', widget=forms.Textarea(attrs={'cols': 35, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
+	review = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 40, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
 	class Meta:
 		model = Review
 		fields =('title', 'review',)

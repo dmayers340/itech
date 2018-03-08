@@ -43,7 +43,7 @@ class Command(BaseCommand):
 			name = 'Fraser building',
 			lat=55.873197, 
 			lng=-4.288235, 
-			description='Water fountain like any other. Avoid the queue by getting to it before the lunch starts. ', 
+			description='Water fountain like any other. Avoid the queue by getting to it before lunch starts. ', 
 			image='fountain_images/default3.png', 
 			floor=2, 
 			reviews=0, 
