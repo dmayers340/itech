@@ -24,7 +24,7 @@ class UserForm(forms.ModelForm):
 		labels={'email':'',}
 		widgets ={
 			#'username': forms.TextInput(attrs={'help_text':None, 'size':40, 'placeholder':'Username'}),
-			'email': forms.TextInput(attrs={'size':50,'placeholder':'Email'}),
+			'email': forms.TextInput(attrs={'size':40,'placeholder':'Email'}),
 		}
 
 class UserProfileForm(forms.ModelForm):
