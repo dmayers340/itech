@@ -51,7 +51,7 @@ class FountainForm (forms.ModelForm):
 	building = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Building'}))
 	floor = forms.IntegerField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Floor'}))
 	description = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Description'}))
-	
+	lat = forms.FloatField()
 	class Meta:
 		model = Fountain
 		fields = ('name', 'building', 'floor', 'description', 'lat', 'lng', 'image')
