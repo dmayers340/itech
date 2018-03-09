@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpRespons
 from django.template import RequestContext
 from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm, FountainForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import PasswordChangeForm
+#from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
@@ -118,6 +118,8 @@ def register(request):
 				profile.picture = request.FILES['picture']
 			profile.save()
 			registered = True
+			user = user_login(request)
+			return HttpResponseRedirect(reverse('index'))
 		else:
 			print(user_form.errors, profile_form.errors)
 	else:
@@ -144,6 +146,7 @@ def user_login(request):
 			return HttpResponse("Invalid login details supplied.") 
 	else:
 		return render(request, 'findafountain/login.html', {})
+
 
 @login_required
 def user_logout(request):

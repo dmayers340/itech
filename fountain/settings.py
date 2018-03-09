@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'findafountain',
-    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +66,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'django.core.context_processors.request'
             ],
         },
     },
@@ -129,9 +127,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+
+STATICFILES_DIRS = [STATIC_DIR, ] # Added by JNR 20.01.2018
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR, ]
-MEDIA_URL = '/media/'
-MEDIA_ROOT = MEDIA_DIR
+
+# Media files
+
+MEDIA_ROOT = MEDIA_DIR 
+MEDIA_URL = '/media/' 
 
 LOGIN_URL = '/findafountain/login/' 
