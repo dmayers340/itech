@@ -60,7 +60,7 @@
 				<b>Building: </b> 
 					<select id ="Building" class ="btn-basic" onchange="sortMarkers(), enableFloor()">
 						<option value="all">All</option>
-						{% for fountain in fountains %}
+						{% for fountain in buildings %}
 						{% if fountain.building %}
 						<option value="{{fountain.building}}">{{fountain.building}}</option>
 						{% endif %}
@@ -71,9 +71,9 @@
 				<b>Floor: </b>
 					<select id ="Floor" class ="btn-basic" onchange="sortMarkers()">
 						<option value="all">All</option>
-						{% for floor in floors %}
-						{% if floor.floor %}
-						<option value="{{floor.floor}}">{{floor.floor}}</option>
+						{% for fountain in floors %}
+						{% if fountain.floor %}
+						<option value="{{fountain.floor}}">{{fountain.floor}}</option>
 						{% endif %}
 						{% endfor %}
 					</select>

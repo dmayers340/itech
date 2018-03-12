@@ -16,7 +16,8 @@ from django.contrib import messages
 
 def index(request):
 	fountain_list = Fountain.objects.order_by('name').distinct()
-	floor_list = Fountain.objects.order_by('floor').distinct()
+	floor_list = Fountain.objects.values('floor').order_by('floor').distinct()
+	building_list = Fountain.objects.values('building').order_by('building').distinct()
 	reviews = Review.objects.order_by('-datetime')
 	ratings = Rating.objects.order_by('-datetime')
 	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, 'ratings': ratings}
@@ -34,7 +35,7 @@ def index(request):
 	recent_activity = sum([review_list, rating_list], [])
 	recent_activity.sort(key=lambda item: item.datetime, reverse=True)
 
-	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': review_list, 'recent_activity': recent_activity}
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'buildings': building_list, 'reviews': review_list, 'recent_activity': recent_activity}
 
 	return render(request, 'findafountain/index.html', context_dict)
 
