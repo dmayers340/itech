@@ -55,7 +55,7 @@ def get_fountain(request, fountain_id_slug):
 			review.save()
 			messages.success(request, 'Review submitted! Well done. Give yourself a pat on a shoulder.')
 			review_form = ReviewForm()
-			
+
 	if request.method=='POST' and 'ratingform' in request.POST:
 		if rating_form.is_valid():
 			print('rating')
@@ -95,9 +95,12 @@ def submit(request):
 	if request.method =='POST':
 		fountain_form = FountainForm(data=request.POST)
 		if fountain_form.is_valid():
-			fountain = fountain_form.save()
+			fountain = fountain_form.save(commit=False)
+			fountain.lat = request.POST.get("latitude", None) 
+			fountain.lng = request.POST.get("longitude", None) 
+			fountain.save()
 		else:
-			print(foutain_form.errors)
+			print(fountain_form.errors)
 	else:
 		fountain_form = FountainForm()
 

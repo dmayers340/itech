@@ -20,7 +20,7 @@ class Fountain(models.Model):
 	reviews = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
 	numberratings = models.IntegerField(default=0)
-	avgrating = models.FloatField(blank=True, null=True)
+	avgrating = models.FloatField(blank=True, null=True, default=0)
 	popularity = models.IntegerField(default=0)
 	broken = models.BooleanField(default='False')
 	building = models.CharField(max_length=32, unique=False, null=True)
