@@ -35,10 +35,10 @@ class UserProfileForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 	title = forms.CharField()
-	review = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 40, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
+	text = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 40, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
 	class Meta:
 		model = Review
-		fields =('title', 'review',)
+		fields =('title', 'text',)
 
 class RatingForm (forms.ModelForm):
 	rate = forms.ChoiceField(choices=[(x,x) for x in range (1,6)])

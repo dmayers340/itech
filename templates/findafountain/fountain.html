@@ -18,6 +18,10 @@
  #map {
 	   width: 100%;
 	 }
+
+.messages {
+	list-style-type: none;
+}
 </style>
 
 <div class = "container-fluid">
@@ -169,6 +173,11 @@
 					geoLocatorInfoWindow.open(map);
 				}
 
+				function removeForm1(){
+					console.log("remove");
+				}
+ 
+
 		</script>
 
 		<script async defer
@@ -203,6 +212,15 @@
 
 			<hr> 
 			<h2><b>Leave a review</b></h2>
+
+				{% if messages %}
+				<ul class="messages">
+				    {% for message in messages %}
+				    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				 	{% endfor %}
+				</ul>
+				{% endif %}
+
 			<form id="review" method="post" enctype="multipart/form-data">
 				 
 				<div align=center>
@@ -210,15 +228,15 @@
 					<b> {{ review_form.as_p }} </b>
 				</div>
 
-				<button type="submit" class="btn-custom" alt="Submit a review">
+				<button type="submit" name="reviewform" class="btn-custom" alt="Submit a review">
 						<b>	Submit a review </b>
 				</button> 	
 			</form>
 
 			<form id="rate" method="post">
 
-					<button type="submit" class="btn-custom" alt="Submit a rating">
-						Submit
+					<button type="submit" name="ratingform" class="btn-custom" alt="Submit a rating">
+						Rate
 					</button> 
 				
 						{% csrf_token %}

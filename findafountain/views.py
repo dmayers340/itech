@@ -11,6 +11,7 @@ from findafountain.models import Review
 from findafountain.models import Rating
 from findafountain.models import UserProfile
 from django.utils import timezone
+from django.contrib import messages
 
 
 def index(request):
@@ -43,28 +44,29 @@ def get_fountain(request, fountain_id_slug):
 	review_form = ReviewForm()
 	rating_form = RatingForm()
 
-	if request.method == "POST":
+	if request.method=='POST' and 'reviewform' in request.POST:
 		review_form = ReviewForm(request.POST)
-		rating_form = RatingForm(request.POST)
-		if review_form.is_valid():
-			print('reviewing')
+		if review_form.is_valid(): 
 			review_form = ReviewForm(request.POST)
 			review = review_form.save(commit=False)
 			review.user = UserProfile.objects.get(user=request.user)
 			review.datetime = timezone.now()
 			review.fountain = Fountain.objects.get(id=fountain_id_slug)
 			review.save()
+			messages.success(request, 'Review submitted! Well done. Give yourself a pat on a shoulder.')
+			review_form = ReviewForm()
+			
+	if request.method=='POST' and 'ratingform' in request.POST:
+		if rating_form.is_valid():
+			print('rating')
+			rating_form = RatingForm(request.POST)
+			rating = rating_form.save(commit=False)
+			rating.user = UserProfile.objects.get(user=request.user)
+			rating.datetime = timezone.now()
+			rating.fountain = Fountain.objects.get(id=fountain_id_slug)
+			rating.save() 
 			return HttpResponseRedirect(reverse('index'))
-		else:
-			if rating_form.is_valid():
-				print('hey hey')
-				rating_form = RatingForm(request.POST)
-				rating = rating_form.save(commit=False)
-				rating.user = UserProfile.objects.get(user=request.user)
-				rating.datetime = timezone.now()
-				rating.fountain = Fountain.objects.get(id=fountain_id_slug)
-				rating.save() 
-				return HttpResponseRedirect(reverse('index'))
+					
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
 		reviews = Review.objects.filter(fountain=fountain_id_slug).order_by('-datetime')
