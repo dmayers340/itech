@@ -58,6 +58,7 @@ def get_fountain(request, fountain_id_slug):
 			review_form = ReviewForm()
 
 	if request.method=='POST' and 'ratingform' in request.POST:
+		rating_form = RatingForm(request.POST)
 		if rating_form.is_valid():
 			print('rating')
 			rating_form = RatingForm(request.POST)

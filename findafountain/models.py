@@ -50,6 +50,6 @@ class Rating(models.Model):
 	fountain = models.ForeignKey(Fountain, related_name='+')
 
 	def __str__(self):
-		return self.id 
+		return self.fountain.name
 
 # Create your models here.

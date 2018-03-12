@@ -41,10 +41,10 @@ class ReviewForm(forms.ModelForm):
 		fields =('title', 'text',)
 
 class RatingForm (forms.ModelForm):
-	rate = forms.ChoiceField(choices=[(x,x) for x in range (1,6)])
+	points = forms.ChoiceField(choices=[(x,x) for x in range (1,6)])
 	class Meta: 
 		model = Rating
-		fields = ('rate',)
+		fields = ('points',)
 
 class FountainForm (forms.ModelForm):
 	name = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Fountain name'}))
