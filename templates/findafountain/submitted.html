@@ -3,15 +3,15 @@
 
 {% block titleblock %}Submission Accepted{% endblock %}
 
-{% block title %}
-  <b><p>Thank you for submitting a fountain, we really appreciate it!</p>
-  <p>Why don't you pop over to the homepage and leave a review for your fountain?</p><br />
-  
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
 	<div>
-	<img src= "{% static 'img/magic-fountain.jpg' %}" alt="Image of a water fountain" height="350" width="300"/><br />
+		<b><p>Thank you for submitting a fountain, we really appreciate it!
+  		Why don't you pop over to the homepage and leave a review for your fountain?</p></b>
+	</div>
+	<div>
+	<img src= "{% static 'img/magic-fountain.jpg' %}" alt="Image of a water fountain"/><br />
 		<a href="{% url 'index' %}">Home</a>
 		<a href="{% url 'about' %}">About</a>
 		<a href="{% url 'contact' %}">Contact</a>
