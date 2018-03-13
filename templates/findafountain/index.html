@@ -26,9 +26,9 @@
 		<div class = "col-sm">
 		{% if user.is_authenticated %}
 			<h3><b>Welcome Back {{ user.username }}!<br />
-			Submit a Review <a href = "{% url 'submit' %}" > Here</a></b></h3>
+			Submit a Fountain <a href = "{% url 'submit' %}" >Here</a></b></h3>
 		{% else %}
-			<h3><b> Sign Up <a href = "{% url 'register' %}" >Here </a> to Submit a Review</b></h3><hr>
+			<h3><b> Sign Up <a href = "{% url 'register' %}" >Here</a> to Submit a Review</b></h3><hr>
 		{% endif %}
 		
 		<div style="max-height: 450px; overflow:auto; padding: 15px; border: 1px solid gainsboro;">

@@ -34,8 +34,8 @@ class UserProfileForm(forms.ModelForm):
 		fields = ('picture',)
 
 class ReviewForm(forms.ModelForm):
-	title = forms.CharField()
-	text = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 40, 'rows': 5, 'placeholder':'Do you enjoy using this fountain? Enter your opinion here and hit the "Submit a review" button when done!'})) 
+	title = forms.CharField(label='', widget=forms.TextInput(attrs={'size':40, 'placeholder':'Title'}))
+	text = forms.CharField(label = '', widget=forms.Textarea(attrs={'style': 'border-color: gainsboro;', 'cols': 38, 'rows': 5, 'placeholder':'Do you enjoy using this water fountain? Enter your opinion here then hit "Submit a review".'})) 
 	class Meta:
 		model = Review
 		fields =('title', 'text',)
