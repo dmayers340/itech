@@ -101,12 +101,16 @@ def submit(request):
 			fountain.lat = request.POST.get("latitude", None) 
 			fountain.lng = request.POST.get("longitude", None) 
 			fountain.save()
+			return HttpResponseRedirect(reverse('submitted'))
 		else:
 			print(fountain_form.errors)
 	else:
 		fountain_form = FountainForm()
 
 	return render(request, 'findafountain/submit.html', {'fountain_form': fountain_form})	
+
+def submitted(request):
+	return render(request, 'findafountain/submitted.html', {})
 
 def register(request):
 	registered=False
