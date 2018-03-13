@@ -53,5 +53,5 @@ class FountainForm (forms.ModelForm):
 	description = forms.CharField(label='', widget=forms.TextInput(attrs={'help_text':None,'size':40, 'placeholder':'Description'}))
 	class Meta:
 		model = Fountain
-		fields = ('name', 'building', 'floor', 'description', 'image')
+		fields = ('name', 'building', 'floor', 'description')
 	
