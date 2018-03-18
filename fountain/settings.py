@@ -84,12 +84,12 @@ DATABASES = {
     }
 }
 
-#PASSWORD_HASHERS = (
- #   'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
- #  'django.contrib.auth.hashers.BCryptPasswordHasher',
- # 'django.contrib.auth.hashers.PBKDF2PasswordHasher',
- #'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
- #)
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
-STATICFILES_DIRS = [STATIC_DIR, ] # Added by JNR 20.01.2018
+STATICFILES_DIRS = [STATIC_DIR, ] 
 STATIC_URL = '/static/'
 
 # Media files
