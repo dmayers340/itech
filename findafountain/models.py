@@ -16,7 +16,7 @@ class Fountain(models.Model):
 	lng = models.FloatField()
 	image = models.ImageField(upload_to='fountain_images', blank=False, default='fountain_images/default2.jpg')
 	description = models.CharField(max_length=250, unique=False)
-	floor = models.IntegerField(default=0, null=True)
+	floor = models.IntegerField(null=False)
 	reviews = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
 	numberratings = models.IntegerField(default=0)

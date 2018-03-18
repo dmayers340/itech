@@ -33,25 +33,45 @@
 			<h3><b> Sign Up <a href = "{% url 'register' %}" >Here</a> to Submit a Review</b></h3><hr>
 		{% endif %}
 
-			<h2><b>Recent Reviews</b></h2><hr>
+			<h2><b>Recent Activity</b></h2><hr>
 		
 			<div style="max-height: 500px; overflow:auto; padding: 15px; border: 1px solid gainsboro;">
 
-				{% for review in reviews %}
-					<img width='75' src='{{MEDIA_URL}}{{review.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
+					{% for item in activity %}
+				
+					<img width='75' src='{{MEDIA_URL}}{{item.user.picture}}' align="left" style="padding: 0 10px 0 0px"/>
 
-					<div style="text-align:left"> 
-						<b> {{review.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}'>{{review.fountain.name}}</a> fountain in the {{review.fountain.building}}<br/>
-					
-						<div style ="color:gray"> 
-							{{review.datetime}}<br/>
+						<div style="text-align:left"> 
+
+							{% if item.title %}
+
+								<b> {{item.user}}</b> reviewed the <a href ='/fountain/{{review.fountain.id}}'>{{item.fountain.name}}</a> fountain in the {{item.fountain.building}}<br/>
+							
+								<div style ="color:gray"> 
+									{{item.datetime}}<br/>
+								</div>
+
+								<b> "{{item.title}}" </b> <br/>
+								{{item.text}}
+
+							{% else %} 
+
+								<b> {{item.user}}</b> rated the <a href ='/fountain/{{review.fountain.id}}'>{{item.fountain.name}}</a> fountain in the {{item.fountain.building}}<br/>
+
+								<div style ="color:gray"> 
+									{{item.datetime}}<br/>
+								</div> 
+
+								<b> {{item.points}} </b> <br/>
+
+							{% endif %}
+
 						</div>
 
-						<b> "{{review.title}}" </b> <br/>
-						{{review.text}}
-					</div> <hr>
+						<hr> 
 
-				{% endfor %} 
+					{% endfor %}
+
 			</div>
 
 		</div>

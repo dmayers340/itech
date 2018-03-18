@@ -34,7 +34,7 @@ def index(request):
 	recent_activity = sum([review_list, rating_list], [])
 	recent_activity.sort(key=lambda item: item.datetime, reverse=True)
 
-	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'buildings': building_list, 'reviews': review_list, 'recent_activity': recent_activity}
+	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'buildings': building_list, 'reviews': review_list, 'activity': recent_activity}
 
 	return render(request, 'findafountain/index.html', context_dict)
 
