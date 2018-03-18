@@ -20,15 +20,6 @@ def index(request):
 	reviews = Review.objects.order_by('-datetime')
 	ratings = Rating.objects.order_by('-datetime')
 	context_dict = {'fountains': fountain_list, 'floors': floor_list, 'reviews': reviews, 'ratings': ratings}
-
-	# activity_list = [] 
-	# for review in review_list:
-	# 	activity_list.append(review)
-	# for rating in rating_list:
-	# 	activity_list.append(rating)
-
-	# recent_activity = activity_list.order_by('-datetime')
-
 	review_list=list(reviews)
 	rating_list=list(ratings)
 	recent_activity = sum([review_list, rating_list], [])
@@ -52,21 +43,19 @@ def get_fountain(request, fountain_id_slug):
 			review.user = UserProfile.objects.get(user=request.user)
 			review.datetime = timezone.now()
 			review.fountain = Fountain.objects.get(id=fountain_id_slug)
-			review.save()
-			messages.success(request, 'Review submitted! Well done. Give yourself a pat on a shoulder.')
-			review_form = ReviewForm()
+			review.save() 
+			return HttpResponseRedirect(reverse('submitted'))
 
 	if request.method=='POST' and 'ratingform' in request.POST:
 		rating_form = RatingForm(request.POST)
 		if rating_form.is_valid():
-			print('rating')
 			rating_form = RatingForm(request.POST)
 			rating = rating_form.save(commit=False)
 			rating.user = UserProfile.objects.get(user=request.user)
 			rating.datetime = timezone.now()
 			rating.fountain = Fountain.objects.get(id=fountain_id_slug)
 			rating.save() 
-			return HttpResponseRedirect(reverse('index'))
+			return HttpResponseRedirect(reverse('submitted'))
 					
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
