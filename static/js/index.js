@@ -3,10 +3,11 @@ var map, infowindow, markers, infoWindows, campus;
 var geoLocatorMarker, geoLocatorInfoWindow;
 var directionsService, directionsDisplay, currentLat, currentLng, currentPosition, pos; 
 var locations;
+var baseurl;
 
 function initMap() {
 
-	console.log(locations);
+	baseurl = window.location.origin;
 
 	map = new google.maps.Map(document.getElementById('map'), {
  	mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -25,7 +26,6 @@ function initMap() {
 function loadAll()
 {	
 	
-	var baseurl = window.location.origin;
 	var marker, i;
 
 	markers = [];
@@ -58,11 +58,10 @@ function loadAll()
 
 				infowindow.setContent(
 				  	"<h4>" + locations[i][0] + "</h4><br/>" + // name   
-				  	"<img width='150' src= '" + "media/" + locations[i][3]+ "'" + "/><hr>" + 
+				  	"<img width='150' src= '" + baseurl + "/media/" + locations[i][3] + " '/><hr>" + 
 				  	locations[i][4] + "<br/></br>" + // description
 				  	"<b>Building: </b>" + locations[i][12] + "</br>" +
-				  	"<b>Floor: </b>" + locations[i][5] + "</br> "+ 
-				  	"<b>Rating: </b>" + locations[i][9] + "</br>" + 
+				  	"<b>Floor: </b>" + locations[i][5] + "</br> "+
 				  	"<b>Broken? </b>" + locations[i][11] + "</br></br>" +
 				  	"<b>Visit the " + "<a href ='/fountain/"+locations[i][13]+"'> fountain page</a> to see the reviews or rate this fountain!</b>"
 				  	);

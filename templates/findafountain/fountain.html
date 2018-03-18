@@ -125,39 +125,50 @@
 
 			<hr> 
 
-			<div class = "col-sm2"> 
+			<div class = "col-sm2">
 
-				<h2><b>Leave a review</b></h2>
+				{% if user.is_authenticated %}
 
-				<form id="review" method="post" enctype="multipart/form-data">
-					 
-					<div align=center>
-						{% csrf_token %}
-						<b> {{ review_form.as_p }} </b>
-					</div>
+					<h2><b>Leave a review</b></h2>
 
-					<button type="submit" name="reviewform" class="btn-custom" width="50" alt="Submit a review">
-							<b>	Submit a review </b>
+					<form id="review" method="post" enctype="multipart/form-data">
+						 
+						<div align=center>
+							{% csrf_token %}
+							<b> {{ review_form.as_p }} </b>
+						</div>
+
+						<button type="submit" name="reviewform" class="btn-custom" width="50" alt="Submit a review">
+								<b>	Submit a review </b>
+						</button>
+
+					</form><br/>
+
+					<form id="rate" method="post">
+
+						<button type="submit" name="ratingform" class="btn-custom" alt="Submit a rating">
+							Rate
+						</button> 
+					
+							{% csrf_token %}
+							{{ rating_form }}
+
+					</form>
+
+					<br/>
+
+				{% else %}
+
+					You need to be <a href = "{% url 'register' %}" >logged in</a> in order to submit a review or rate a fountain. 
+
+					<br/>
+					<br/>
+
+				{% endif %}
+
+					<button type="report" class="btn-custom-red" alt="Report broken">
+						<b>	Report a broken fountain</b>
 					</button>
-
-				</form><br/>
-
-				<form id="rate" method="post">
-
-					<button type="submit" name="ratingform" class="btn-custom" alt="Submit a rating">
-						Rate
-					</button> 
-				
-						{% csrf_token %}
-						{{ rating_form }}
-
-				</form>
-
-				<br/>
-
-				<button type="report" class="btn-custom-red" alt="Report broken">
-				<b>	Report a broken fountain</b>
-				</button>
 
 			</div>
 
