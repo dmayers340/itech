@@ -32,14 +32,25 @@
 			<img width=300 height="auto" src='{{ MEDIA_URL}}{{fountain.image}}'/><br/> 
 	 		<hr>
 
-	 		{% if fountain.avgrating %}
+	 		{% if ratings %}
 	 		<b> Rating: </b>
 
 			 <div id ="rating" style="font-size:1.5em; color: gold "> 
 
 					<script type="text/javascript"> 
-							var rating = {{fountain.avgrating}};
+
+							var rating = 0; 
+
+							{% for rating in ratings %}
+
+							rating = rating + {{rating.points}};
+
+							{% endfor %}
+
+							rating = rating / {{ratings|length}};
+
 							printRating(rating);
+
 					</script>
 
 			</div>

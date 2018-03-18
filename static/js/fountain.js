@@ -18,8 +18,7 @@ function initMap() {
 
 function loadLocation(fLat, fLng){
 
-	var baseurl = window.location.origin;
-	console.log(baseurl);
+	var baseurl = window.location.origin; 
 
 	lat = fLat; 
 	lng = fLng;

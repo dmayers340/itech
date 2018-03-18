@@ -12,6 +12,7 @@
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 <style>
 	 #map {
@@ -56,13 +57,15 @@
 
 							{% else %} 
 
-								<b> {{item.user}}</b> rated the <a href ='/fountain/{{review.fountain.id}}'>{{item.fountain.name}}</a> fountain in the {{item.fountain.building}}<br/>
+								<b> {{item.user}}</b> rated the <a href ='/fountain/{{item.fountain.id}}'>{{item.fountain.name}}</a> fountain in the {{item.fountain.building}}<br/>
 
 								<div style ="color:gray"> 
 									{{item.datetime}}<br/>
 								</div> 
 
-								<b> {{item.points}} </b> <br/>
+								<script> printRating({{item.points}}); </script>
+
+								<b><div id = "rating" style="font-size:1em; color: gold "> </div> </b> <br/>
 
 							{% endif %}
 
