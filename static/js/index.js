@@ -277,11 +277,3 @@ function handleLocationError(browserHasGeolocation, geoLocatorInfoWindow) {
 				  'Error: Your browser doesn\'t support geolocation.'); 
 	geoLocatorInfoWindow.open(map);
 }
-
-function printRating(r) {
-   			var x ="", i;
-   			for (i=1; i<=r; i++) {
-       			 x = x + "<i class='fas fa-star'></i> ";  
-   			 }		
-    		document.getElementById("rating").innerHTML = x;
-}
