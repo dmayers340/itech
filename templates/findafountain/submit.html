@@ -10,6 +10,7 @@
 {% block content %} 
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
+<script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
 
 <div class = "container-fluid">
 	<div class = "row">
@@ -42,39 +43,10 @@
 
 		<div id="map" div style="max-height: 750px; border: 1px solid white; width:72.53%; height: 1000px">
 
-			  <script type="text/javascript">
-
-				var map, marker; 
-				var position, currentLatitude, currentLongitude;
-				var campus;
-
-				// initialises a new map 
-				function initMap() {
-					map = new google.maps.Map(document.getElementById('map'), {
-					  zoom: 17,
-					  mapTypeId: google.maps.MapTypeId.ROADMAP,
-					});
-
-					campus  = new google.maps.LatLng(55.872084,-4.288222);
-					map.setCenter(campus);
-
-					marker = new google.maps.Marker({
-						map: map, 
-						position: campus,
-						visible: true, 
-						draggable: true
-					}); 
-
-					google.maps.event.addListener(marker, 'dragend', function(marker){
-						position = marker.latLng; 
-						currentLatitude = position.lat();
-						currentLongitude = position.lng();
-						console.log(currentLatitude, currentLongitude);
-						document.getElementById("latitude").value=currentLatitude;
-						document.getElementById("longitude").value=currentLongitude;
-					 });
+			  <script id="map">
+				window.onload = function() {
+					initMap()
 				}
-
 			  </script>
 
 			  <!-- API key DO NOT REMOVE no matter what -->
