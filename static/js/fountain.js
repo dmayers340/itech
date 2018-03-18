@@ -28,11 +28,15 @@ function loadLocation(fLat, fLng){
 		position: new google.maps.LatLng(lat, lng),
 		map: map,
 		icon: {
-			url: baseurl + 'static/img/icon.svg',
+			url: baseurl + "/static/img/icon.svg",
 			scaledSize: new google.maps.Size(60, 50)
 		},
 		visible: true
 	  });
+
+	var locationWindow = new google.maps.InfoWindow;
+		locationWindow.setContent('Your destination');
+		locationWindow.open(map, marker);
 
 	locateUser(); 
 }
