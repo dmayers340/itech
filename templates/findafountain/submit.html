@@ -11,32 +11,18 @@
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
 
-<style>
-	img {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
+<div class = "container-fluid">
+	<div class = "row">
 
-	#map {
-		   width: 100%;
-		   height: 500px;
-	}
-</style>
+		<div class = "col-left" style="border: 1px solid white;">
+			{% if user.is_authenticated %}
+				<b style="font-size:25px">Please go ahead and submit your fountain.</b><br />
 
-<div>
-	{% if user.is_authenticated %}
-		<b style="font-size:25px">Please go ahead and submit your fountain.</b>
+				<b style="font-size:18px"> Drag the marker to the location of the fountain. </b><br /> 
 
-		<br/>
+				<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
 
-		<b style="font-size:18px"> Drag the marker to the location of the fountain. </b>
-
-		<br/> 
-
-			<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
-
-				<input id="latitude" type="text" name="latitude" size="40" placeholder="Latitude" style="margin:0 0 15px 0"><br/>
+				<input id="latitude" type="text" name="latitude" size="40" placeholder="Latitude" style="margin:20px 0 15px 0"><br/>
 				<input id="longitude" type="text" name="longitude" size="40" placeholder="Longitude" style="margin:0 0 15px 0">
 			
 				{% csrf_token %}
@@ -44,12 +30,17 @@
 					{% for field in fountain_form %}
 				{% endfor %}
 
-			<input type="submit" name="submit" value="Submit" />
-			</form>
+				<input type="submit" name="submit" value="Submit" />
+				</form>
 
-		<br/><br/>
+				<br/>
 
-		<div id="map" div style="max-height: 600px">
+				<div>
+				<img style="border: 1px solid white; width: 300px; height: 290px" src="{% static 'img/pixabay_fountain.jpg' %}" alt="Image of a fountain"/>
+				</div>
+		</div>
+
+		<div id="map" div style="max-height: 750px; border: 1px solid white; width:72.53%; height: 1000px">
 
 			  <script type="text/javascript">
 
@@ -86,21 +77,22 @@
 
 			  </script>
 
-			  <!-- API key 
-			  DO NOT REMOVE no matter what -->
+			  <!-- API key DO NOT REMOVE no matter what -->
 			   <script async defer
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
 			   </script>
 
 		</div>
 
-	{% else %}
-		<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
-		<p><b style="font-size:25px">Login<a href= "{% url 'register' %}"> Here</a></b></p>
-		<div>
-		<img src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
+		<div id = "Not logged in">
+			{% else %}
+				<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
+				<p><b style="font-size:25px">Login<a href= "{% url 'register' %}"> Here</a></b></p>
+				<div>
+				<img style="display:block; margin-left:auto; margin-right:auto" src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
+				</div>
+				{% endif %}
 		</div>
-	{% endif %}
+	</div>	
 </div>
-
 {% endblock %}
