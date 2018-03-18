@@ -23,14 +23,12 @@ class UserForm(forms.ModelForm):
 		fields =('username', 'email', 'password') 
 		labels={'email':'',}
 		widgets ={
-			#'username': forms.TextInput(attrs={'help_text':None, 'size':40, 'placeholder':'Username'}),
 			'email': forms.TextInput(attrs={'size':40,'placeholder':'Email'}),
 		}
 
 class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
-		#fields = ('website', 'picture')
 		fields = ('picture',)
 
 class ReviewForm(forms.ModelForm):

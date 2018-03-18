@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpRespons
 from django.template import RequestContext
 from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm, FountainForm
 from django.contrib.auth import authenticate, login, logout
-#from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
 from findafountain.models import Fountain
