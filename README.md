@@ -1,6 +1,6 @@
-To Start the Project:
+Check us out on Python Anywhere at https://findafountain.pythonanywhere.com/
 
-IF IN DOUBT: https://tutorial.djangogirls.org/en/
+To Start the Project:
 
 1.) Create a folder on your computer
 
@@ -52,24 +52,3 @@ Itech Folder Structure:
 	
 	-manage.py 
 
-
-GIT:
-
-ALWAYS RUN git status FIRST
-
-1.) git status
-
-2.) git add --all .
-
-3.) git commit -m "Detailed message about changes"
-
-4.) git push
-
-TO Checkout New Branch:
-
-git checkout -b newbranch
-
-git add --all .
-
-git commit -m "changes stuff write detailed message"
-git push --set-upstream origin newbranch
