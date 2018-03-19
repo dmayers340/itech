@@ -12,6 +12,7 @@
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <script type="text/javascript" src="{% static 'js/fountain.js' %}"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 <style>
   #map {
@@ -164,25 +165,32 @@
 
 				{% endif %}
 
+				{% if fountain.broken %}
 
 					<form method="post">
-						<button id ="Broken" type="submit" name="BrokenFountainForm" style= "margin: 0 0 7.5px 0; width: 250px" class="btn-custom-red" alt="Report broken">
-
-					<button type="broken" name = "brokenfountain" style= "margin: 0 0 7.5px 0; width: 250px" class="btn-custom-red" alt="Report broken">
-
-						<b>	Report a broken fountain</b>
-						</button>
-					</form>
-
-
-					<form method="post">
-						<button id="Fixed" type="submit" name="BrokenFountainForm" style= "margin: 7.5px 0 0 0; width: 250px" class="btn-custom-green" alt="Report fixed">
-
-					<button type="fixed" style= "margin: 7.5px 0 0 0; width: 250px" class="btn-custom-green" alt="Report fixed">
+						<button id="BrokenFountainForm" type="submit" name="broken" style= "margin: 7.5px 0 0 0; width: 250px" class="btn-custom-green" alt="Report fixed" value = "False">
 
 						<b>	Report this fountain as fixed</b>
 						</button>
+
+							{% csrf_token %}
+							{{ BrokenFountainForm }}
+
 					</form>
+
+				{% else %} 
+
+					<form method="post">
+						<button id ="BrokenFountainForm" type="submit" name="broken" style= "margin: 0 0 7.5px 0; width: 250px" class="btn-custom-red" alt="Report broken" value = "True">
+						<b>	Report a broken fountain</b>
+						</button>
+
+						{% csrf_token %}
+						{{ BrokenFountainForm }}
+
+					</form>
+					
+				{% endif %}
 
 			</div>
 

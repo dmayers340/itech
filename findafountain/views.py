@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseNotFound
 from django.template import RequestContext
-from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm, FountainForm
+from findafountain.forms import UserForm, UserProfileForm, ReviewForm, RatingForm, FountainForm, BrokenFountainForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse 
@@ -34,6 +34,7 @@ def get_fountain(request, fountain_id_slug):
 	context_dict = {}
 	review_form = ReviewForm()
 	rating_form = RatingForm()
+	brokenfountain_form = BrokenFountainForm()
 
 	if request.method=='POST' and 'reviewform' in request.POST:
 		review_form = ReviewForm(request.POST)
@@ -57,18 +58,17 @@ def get_fountain(request, fountain_id_slug):
 			rating.save() 
 			return HttpResponseRedirect(reverse('submitted'))
 
-	if request.method == 'POST' and 'BrokenFountainForm' in request.POST:
+	if request.method == 'POST' and 'broken' in request.POST:
 		brokenfountain_form = BrokenFountainForm(request.POST)
-		if brokenfountain_form.is_valid():
-			brokenfountain_form = BrokenFountainForm(request.POST)
-			# broken = brokenfountain_form.save(commit=False)
-			fountain = Fountain.objects.get(id=fountain_id_slug)
-			if broken.request.POST.get("Broken"):
-				fountain.broken = True
-			elif broken.request.POST.get("Fixed"):
-				fountain.broken = False 
-			fountain.save()
-			return HttpResponseRedirect(reverse('submitted'))
+		brokenfountain_form = BrokenFountainForm(request.POST)
+		fountain = Fountain.objects.get(id=fountain_id_slug)
+		broken = request.POST.get("broken", None) 
+		if broken == 'True':
+			fountain.broken = True
+		elif broken == 'False':
+			fountain.broken = False
+		fountain.save()
+		return HttpResponseRedirect(reverse('submitted'))
 					
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
