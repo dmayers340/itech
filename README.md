@@ -19,13 +19,17 @@ IF IN DOUBT: https://tutorial.djangogirls.org/en/
 
 8.) pip install bcrypt
 
-9.) python manage.py addfountains
+9.) python manage.py makemigrations
 
-10.) python manage.py addusers
+10.) python manage.py migrate
 
-11.) python manage.py addprofiles
+11.) python manage.py addfountains
 
-12.) python manage.py addreviews
+12.) python manage.py addusers
+
+13.) python manage.py addprofiles
+
+14.) python manage.py addreviews
 
 
 Itech Folder Structure:
