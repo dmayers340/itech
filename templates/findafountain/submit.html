@@ -58,10 +58,11 @@
 
 		<div id = "Not logged in">
 			{% else %}
+			<div class = "submit">
 				<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
 				<p><b style="font-size:25px">Login<a href= "{% url 'register' %}"> Here</a></b></p>
 				<div>
-				<img style="display:block; margin-left:auto; margin-right:auto" src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
+					<img style="display:block; margin-left:auto; margin-right:auto" src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
 				</div>
 				{% endif %}
 		</div>

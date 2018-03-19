@@ -228,4 +228,10 @@ header {
   margin-top:50px;
   }
 
-  
+  .submit{
+    text-align: center;
+    align-content: center;
+    float:center;
+    margin-right:auto;
+    margin-left:150px;
+    }  
