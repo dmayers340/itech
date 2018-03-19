@@ -11,9 +11,21 @@ IF IN DOUBT: https://tutorial.djangogirls.org/en/
 	
 4.) Clone github repository (git clone https://github.com/dmayers340/itech.git)
 
-5.) (cd itech)-could probably install django without doing this
+5.) CD into itech (cd itech)
 
 6.) Install Django (pip install django~=1.11.0)
+
+7.) pip install pillow
+
+8.) pip install bcrypt
+
+9.) python manage.py addfountains
+
+10.) python manage.py addusers
+
+11.) python manage.py addprofiles
+
+12.) python manage.py addreviews
 
 
 Itech Folder Structure:
