@@ -60,7 +60,6 @@ def get_fountain(request, fountain_id_slug):
 
 	if request.method == 'POST' and 'broken' in request.POST:
 		brokenfountain_form = BrokenFountainForm(request.POST)
-		brokenfountain_form = BrokenFountainForm(request.POST)
 		fountain = Fountain.objects.get(id=fountain_id_slug)
 		broken = request.POST.get("broken", None) 
 		if broken == 'True':
