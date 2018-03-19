@@ -12,12 +12,11 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
 <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
 
+<div class = "row">
 <div class = "container-fluid">
-	<div class = "row">
-
-		<div class = "col-left" style="border: 1px solid white;">
+		<div class = "col-left">
 			{% if user.is_authenticated %}
-				<b style="font-size:25px">Please go ahead and submit your fountain.</b><br />
+				<b style="font-size:25px">Submit Your Fountain Here!</b><br />
 
 				<b style="font-size:18px"> Drag the marker to the location of the fountain. </b><br /> 
 
@@ -37,24 +36,25 @@
 				<br/>
 
 				<div>
-				<img style="border: 1px solid white; width: 300px; height: 290px" src="{% static 'img/pixabay_fountain.jpg' %}" alt="Image of a fountain"/>
+					<img style="border: 1px solid white; width: 300px; height: 290px" src="{% static 'img/pixabay_fountain.jpg' %}" alt="Image of a fountain"/>
 				</div>
 		</div>
 
-		<div id="map" div style="max-height: 750px; border: 1px solid white; width:72.53%; height: 1000px">
+		<div class = "col-right"> 
+			<div id="map" div style="max-height: 750px; border: 2px solid white; width:73.2%; top:0; height: 1000px; float:right;">
+				  <script id="map">
+					window.onload = function() {
+						initMap()
+					}
+				  </script>
 
-			  <script id="map">
-				window.onload = function() {
-					initMap()
-				}
-			  </script>
-
-			  <!-- API key DO NOT REMOVE no matter what -->
-			   <script async defer
-				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
-			   </script>
-
+				  <!-- API key DO NOT REMOVE no matter what -->
+				   <script async defer
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+				   </script>
+			</div>
 		</div>
+	</div>
 
 		<div id = "Not logged in">
 			{% else %}
