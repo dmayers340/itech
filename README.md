@@ -1,5 +1,7 @@
 Check us out on Python Anywhere at https://findafountain.pythonanywhere.com/
 
+The website makes use of Google Maps geolocation and it is highly recommended to run it as a secure HTTPS site, with location services enabled. 
+
 To Start the Project:
 
 1.) Create a folder on your computer
