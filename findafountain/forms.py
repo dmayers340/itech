@@ -52,4 +52,10 @@ class FountainForm (forms.ModelForm):
 	class Meta:
 		model = Fountain
 		fields = ('name', 'building', 'floor', 'description')
+
+class BrokenFountainForm (forms.ModelForm):
+	broken = forms.BooleanField()
+	class Meta:
+		model = Fountain
+		fields = ('broken',)
 	

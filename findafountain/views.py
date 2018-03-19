@@ -56,6 +56,19 @@ def get_fountain(request, fountain_id_slug):
 			rating.fountain = Fountain.objects.get(id=fountain_id_slug)
 			rating.save() 
 			return HttpResponseRedirect(reverse('submitted'))
+
+	if request.method == 'POST' and 'BrokenFountainForm' in request.POST:
+		brokenfountain_form = BrokenFountainForm(request.POST)
+		if brokenfountain_form.is_valid():
+			brokenfountain_form = BrokenFountainForm(request.POST)
+			# broken = brokenfountain_form.save(commit=False)
+			fountain = Fountain.objects.get(id=fountain_id_slug)
+			if broken.request.POST.get("Broken"):
+				fountain.broken = True
+			elif broken.request.POST.get("Fixed"):
+				fountain.broken = False 
+			fountain.save()
+			return HttpResponseRedirect(reverse('submitted'))
 					
 	try: 
 		fountain = Fountain.objects.get(id=fountain_id_slug)
@@ -145,7 +158,6 @@ def user_login(request):
 			return HttpResponse("Invalid login details supplied.") 
 	else:
 		return render(request, 'findafountain/login.html', {})
-
 
 @login_required
 def user_logout(request):
