@@ -218,20 +218,20 @@ header {
 .googlebutton{
   float:center;
 }
+
 .center{
   float: center;
-  border: #ddd  1px solid;
-  border-color:#000;
+  border:#ffffff  2px solid;
+  border-color:#ffffff;  
 }
 
+.fullimg{
+  max-width:100%;
+  height:auto;
+  max-height:500px;
+}
 .background { 
   margin-top:50px;
   }
 
-  .submit{
-    text-align: center;
-    align-content: center;
-    float:center;
-    margin-right:auto;
-    margin-left:150px;
-    }  
+

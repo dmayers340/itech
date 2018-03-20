@@ -12,60 +12,66 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
 <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
 
-<div class = "row">
-<div class = "container-fluid">
-		<div class = "col-left">
-			{% if user.is_authenticated %}
-				<b style="font-size:25px">Submit Your Fountain Here!</b><br />
+{% if user.is_authenticated %}
+	<div class = "row">
+		<div class = "container-fluid">
+			<div class = "col-left">
+					<b style="font-size:25px">Submit Your Fountain Here!</b><br />
 
-				<b style="font-size:18px"> Drag the marker to the location of the fountain. </b><br /> 
+					<b style="font-size:18px"> Drag the marker to the location of the fountain. </b><br /> 
 
-				<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
+					<form id = "fountain_form" method="post" action="{% url 'submit' %}" enctype="multipart/form-data">
 
-				<input id="latitude" type="text" name="latitude" size="40" placeholder="Latitude" style="margin:20px 0 15px 0"><br/>
-				<input id="longitude" type="text" name="longitude" size="40" placeholder="Longitude" style="margin:0 0 15px 0">
-			
-				{% csrf_token %}
-				{{ fountain_form.as_p }}
-					{% for field in fountain_form %}
-				{% endfor %}
+					<input id="latitude" type="text" name="latitude" size="40" placeholder="Latitude" style="margin:20px 0 15px 0"><br/>
+					<input id="longitude" type="text" name="longitude" size="40" placeholder="Longitude" style="margin:0 0 15px 0">
+				
+					{% csrf_token %}
+					{{ fountain_form.as_p }}
+						{% for field in fountain_form %}
+					{% endfor %}
 
-				<input type="submit" name="submit" value="Submit" />
-				</form>
+					<input type="submit" name="submit" value="Submit" />
+					</form>
 
-				<br/>
+					<br/>
 
-				<div>
-					<img style="border: 1px solid white; width: 300px; height: 290px" src="{% static 'img/pixabay_fountain.jpg' %}" alt="Image of a fountain"/>
-				</div>
-		</div>
+					<div>
+						<img style="border: 1px solid white; width: 300px; height: 290px" src="{% static 'img/pixabay_fountain.jpg' %}" alt="Image of a fountain"/>
+					</div> <!-- Image Div End -->
+			</div> <!-- Col-Left End -->
 
-		<div class = "col-right"> 
-			<div id="map" div style="max-height: 750px; border: 2px solid white; width:73.2%; top:0; height: 1000px; float:right;">
-				  <script id="map">
-					window.onload = function() {
-						initMap()
-					}
-				  </script>
+			<div class = "col-right"> 
+				<div id="map" div style="max-height: 750px; border: 2px solid white; width:73.2%; top:0; height: 1000px; float:right;">
+					  <script id="map">
+						window.onload = function() {
+							initMap()
+						}
+					  </script>
 
-				  <!-- API key DO NOT REMOVE no matter what -->
-				   <script async defer
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
-				   </script>
-			</div>
-		</div>
-	</div>
+					  <!-- API key DO NOT REMOVE no matter what -->
+					   <script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALaN1AQdFvEnlLyNLdHUmYKSjX5C82B4I&callback=initMap">
+					   </script>
+				</div> <!-- end map div -->
+			</div> <!-- end col-right -->
+		</div> <!-- end container-fluid -->
+	</div> <!-- end row -->
+
 
 		<div id = "Not logged in">
 			{% else %}
-			<div class = "submit">
-				<b style="font-size:25px">In order to submit a fountain, you're going to have to login first!</b>
-				<p><b style="font-size:25px">Login<a href= "{% url 'register' %}"> Here</a></b></p>
-				<div>
-					<img style="display:block; margin-left:auto; margin-right:auto" src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain"/>
-				</div>
-				{% endif %}
+				<div class = "row">
+					<div class = "container-fluid">
+						<div class = "center">
+							<h2><b>In order to submit a fountain, you're going to have to login first!</b>
+							<p><b>Login<a href= "{% url 'register' %}"> Here</a></b></p></h2>
+							
+							<img src="{% static 'img/trevi.jpg' %}" alt="Image of the Trevi Fountain" class = "fullimg"/>
+						</div> <!--end submit div -->
+					</div>	<!--end container div -->
+				</div> <!-- end row div -->
 		</div>
-	</div>	
+					{% endif %}
+		
 </div>
 {% endblock %}
